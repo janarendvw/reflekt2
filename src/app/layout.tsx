@@ -40,6 +40,7 @@ export default async function RootLayout({
           <SessionProvider session={session}>
             <main className="h-screen flex flex-col">
               <NavBar />
+              test
               <Separator />
               <ResizablePanelGroup direction="horizontal">
                 <ResizablePanel defaultSize={10}>
