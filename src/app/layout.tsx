@@ -34,20 +34,21 @@ export default async function RootLayout({
   }
 
 
+
   return (
     <html lang="en">
       <body className={inter.className}>
           <SessionProvider session={session}>
             <main className="h-screen flex flex-col">
               <NavBar />
-              test
+              
               <Separator />
               <ResizablePanelGroup direction="horizontal">
                 <ResizablePanel defaultSize={10}>
                   <SideBar />
                 </ResizablePanel>
                 <ResizableHandle />
-                <ResizablePanel>{children}</ResizablePanel>
+                <ResizablePanel defaultSize={90}>{children}</ResizablePanel>
               </ResizablePanelGroup>
             </main>
           </SessionProvider>
