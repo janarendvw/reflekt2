@@ -23,7 +23,7 @@ async function SideBar({}: Props) {
     <div className="flex flex-col items-center p-2 gap-2">
       {links.map((link) => (
         <Link
-          className="flex py-1 px-4 justify-start w-full hover:bg-accent rounded"
+          className="flex py-1 px-4 justify-start w-full hover:bg-accent rounded text-sm font-medium tracking-wide"
           key={link.href}
           href={link.href}
         >
