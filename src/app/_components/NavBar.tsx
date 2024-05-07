@@ -1,42 +1,44 @@
-"use client";
-import React from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+'use client'
+import React from 'react'
+import { signIn, signOut, useSession } from 'next-auth/react'
+import { Button } from '@/components/ui/button'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 
 function AuthButton() {
-  const session = useSession();
+  const session = useSession()
 
   if (session) {
     return (
-      <Button size={"sm"} onClick={() => signOut()}>
+      <Button size={'sm'} onClick={() => signOut()}>
         Sign out
       </Button>
-    );
+    )
   } else {
     return (
-      <Button size={"sm"} onClick={() => signIn()}>
+      <Button size={'sm'} onClick={() => signIn()}>
         Sign in
       </Button>
-    );
+    )
   }
 }
 
-type Props = {};
+type Props = {}
 
 function NavBar({}: Props) {
-  const session = useSession();
+  const session = useSession()
   return (
-    <div className="p-4 flex justify-between items-center">
+    <div className="flex items-center justify-between px-4 py-2">
       <span>LOGO</span>
       <div className="flex items-center gap-4">
         <Avatar>
-          <AvatarFallback>{session?.data?.user?.name?.[0] ?? ''}</AvatarFallback>
+          <AvatarFallback>
+            {session?.data?.user?.name?.[0] ?? ''}
+          </AvatarFallback>
         </Avatar>
         <AuthButton />
       </div>
     </div>
-  );
+  )
 }
 
-export default NavBar;
+export default NavBar
