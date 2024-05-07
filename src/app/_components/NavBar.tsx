@@ -25,11 +25,14 @@ function AuthButton() {
 type Props = {};
 
 function NavBar({}: Props) {
+  const session = useSession();
   return (
     <div className="p-4 flex justify-between items-center">
       <span>LOGO</span>
       <div className="flex items-center gap-4">
-        <Avatar></Avatar>
+        <Avatar>
+          <AvatarFallback>{session?.data?.user?.name?.[0] ?? ''}</AvatarFallback>
+        </Avatar>
         <AuthButton />
       </div>
     </div>
