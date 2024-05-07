@@ -5,6 +5,7 @@ type Props = {};
 
 async function page({}: Props) {
   const reflections = await prisma.reflection.findMany();
+  
   return (
     <div>
       {reflections.map((reflection) => {
