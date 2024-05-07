@@ -24,7 +24,7 @@ export const columns: ColumnDef<Reflection>[] = [
     {
         header: "Actions",
         accessorKey: "id",
-        cell: (({row}) => <Button variant="destructive" size="sm" onClick={() => deleteReflectionById(row.original.id)}>Delete</Button>),
+        cell: (({row}) => <Button variant="destructive" size="sm" onClick={() => {deleteReflectionById(row.original.id).then(() => window.location.reload())}}>Delete</Button>),
     }
   
 
