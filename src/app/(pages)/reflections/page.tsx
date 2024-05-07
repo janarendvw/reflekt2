@@ -1,5 +1,7 @@
 import prisma from "@/lib/client";
 import React from "react";
+import { DataTable } from "./data-table";
+import { columns } from "./columns";
 
 type Props = {};
 
@@ -8,9 +10,7 @@ async function page({}: Props) {
   
   return (
     <div>
-      {reflections.map((reflection) => {
-        return <div key={reflection.id}>{reflection.content}</div>;
-      })}
+      <DataTable columns={columns} data={reflections} />
     </div>
   );
 }
