@@ -27,7 +27,7 @@ async function main() {
 
   //create reflection and link to user
 
-  for(let i = 0; i < 10; i++) {
+  for(let i = 0; i < 100; i++) {
   await prisma.reflection.create({
     data: {
       title: faker.lorem.sentence(),
@@ -39,15 +39,16 @@ async function main() {
       reflectionType: faker.helpers.arrayElement([ReflectionModelType.STARR]),
       createdAt: faker.date.recent({ days: 20 }),
       actionPoints: {
-        create: generateActionPoints('clvxi9qlg000011pef9g9cuwe'),
+        create: generateActionPoints('clvxn68p00000y9zsozwoitjl'),
       },
       author: {
         connect: {
-          id: 'clvxi9qlg000011pef9g9cuwe',
+          id: 'clvxn68p00000y9zsozwoitjl',
         },
       },
     },
   })
+  console.log(`Reflection ${i} created`)
 }
 }
 

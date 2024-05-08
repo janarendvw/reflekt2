@@ -3,6 +3,9 @@ import React from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import NavbarBreadcrumb from "./NavBarBreadcrumb";
+import Image from "next/image";
+import Logo from "./Logo";
 
 function AuthButton() {
   const session = useSession();
@@ -28,7 +31,7 @@ function NavBar({}: Props) {
   const session = useSession();
   return (
     <div className="py-2 px-4 flex justify-between items-center">
-      <span>LOGO</span>
+      <Logo />
       <div className="flex items-center gap-4">
         <Avatar>
           <AvatarFallback>

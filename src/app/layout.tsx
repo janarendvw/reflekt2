@@ -12,6 +12,7 @@ import {
   ResizableHandle,
 } from '@/components/ui/resizable'
 import { auth } from '@/auth'
+import NavbarBreadcrumb from './_components/NavBarBreadcrumb'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -45,8 +46,21 @@ export default async function RootLayout({
                 <SideBar />
               </ResizablePanel>
               <ResizableHandle />
-              <ResizablePanel defaultSize={90}>
-                <main className="container py-16">{children}</main>
+              <ResizablePanel
+                style={{ maxHeight: 'calc(100vh - 70px)' }}
+                defaultSize={85}
+                className="relative"
+              >
+                {' '}
+                <div className="flex w-full items-center bg-secondary shadow px-4 py-2">
+                  <NavbarBreadcrumb />
+                </div>
+                <main
+                  style={{ maxHeight: 'calc(100vh - 70px)' }}
+                  className="container flex flex-col gap-8 overflow-y-auto py-20"
+                >
+                  {children}
+                </main>
               </ResizablePanel>
             </ResizablePanelGroup>
           </main>
