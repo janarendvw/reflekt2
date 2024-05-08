@@ -3,9 +3,17 @@ import React from 'react'
 
 type Props = {}
 
-function loading({}: Props) {
+async function loading({}: Props) {
   return (
-    <Skeleton className='w-full h-screen' />
+    <div className="flex flex-col gap-4 mx-auto items-center">
+              <Skeleton className='h-10 w-56' />
+
+      <div className='flex gap-4'>
+        <Skeleton className='aspect-square w-56' />
+        <Skeleton className='aspect-square w-56' />
+        <Skeleton className='aspect-square w-56' />
+      </div>
+    </div>
   )
 }
 

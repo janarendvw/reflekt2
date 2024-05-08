@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-function page({}: Props) {
+async function page({}: Props) {
   return (
     <div>page</div>
   )

@@ -3,7 +3,7 @@ import React from 'react'
 
 type Props = {}
 
-function loading({}: Props) {
+async function loading({}: Props) {
   return (
     <Skeleton className='w-full h-screen' />
   )
