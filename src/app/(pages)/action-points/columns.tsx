@@ -13,6 +13,14 @@ import { cn } from '@/lib/utils'
 import { ActionPoint } from '@prisma/client'
 import { ColumnDef } from '@tanstack/react-table'
 import Link from 'next/link'
+import {
+  Check,
+  CheckCircle,
+  CircleCheck,
+  CircleDotDashed,
+  EllipsisVertical,
+  Hourglass,
+} from 'lucide-react'
 
 export const columns: ColumnDef<ActionPoint>[] = [
   {
@@ -46,10 +54,20 @@ export const columns: ColumnDef<ActionPoint>[] = [
       <Badge
         className={cn({
           'bg-green-600': row.original.resolved,
-          'border border-foreground/50 bg-transparent text-foreground': !row.original.resolved,
+          'border border-foreground/50 bg-transparent text-foreground':
+            !row.original.resolved,
         })}
       >
-        {row.original.resolved ? 'Resolved' : 'Open'}
+        {row.original.resolved ? (
+          <span className="flex items-center gap-2">
+            <CircleCheck size={14} /> Resolved
+          </span>
+        ) : (
+          <span className="flex items-center gap-2">
+            <Hourglass size={14} />
+            Open
+          </span>
+        )}
       </Badge>
     ),
   },
@@ -60,7 +78,7 @@ export const columns: ColumnDef<ActionPoint>[] = [
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="font-bold">
-            &#8285;
+            <EllipsisVertical size={14} />{' '}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>

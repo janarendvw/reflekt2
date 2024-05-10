@@ -2,6 +2,7 @@
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
+import { FlipHorizontal2, Home, Sparkle, Zap } from 'lucide-react'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -13,26 +14,29 @@ const links = [
   {
     name: 'Dashboard',
     href: '/dashboard',
+    icon: <Home size={20} />,
   },
   {
     name: 'Reflections',
     href: '/reflections',
+    icon: <FlipHorizontal2 size={20} />,
   },
   {
     name: 'Action points',
     href: '/action-points',
+    icon: <Zap size={20} />,
   },
 ]
 
 function SideBar({}: Props) {
   const pathname = usePathname()
   return (
-    <div className="flex flex-col items-center gap-1 p-2">
+    <div className="flex flex-col items-center gap-1 p-1">
       <Link
         href={'/reflections/create-new'}
-        className="flex w-full justify-start rounded-md bg-orange-500 px-4 py-3 text-center text-sm font-medium tracking-wide text-white"
+        className="flex w-full items-center justify-start gap-2 rounded-md bg-orange-500 px-4 py-3 text-sm font-medium tracking-wide text-white"
       >
-        Create new
+        <Sparkle size={20} /> Create new
       </Link>
       <Separator />
       {links.map((link) => (
@@ -42,11 +46,14 @@ function SideBar({}: Props) {
               'relative flex w-full justify-start rounded px-4 py-2 text-sm font-medium tracking-wide',
               pathname.includes(link.href ?? ':::')
                 ? 'text-foreground'
-                : 'text-muted-foreground'
+                : 'text-muted-foreground',
             )}
             href={link.href}
           >
-            <span className="z-10">{link.name}</span>
+            <span className="z-10 flex items-center gap-2">
+              {link.icon}
+              {link.name}
+            </span>
             {pathname.includes(link.href ?? ':::') && (
               <motion.span
                 layoutId="active-link"
@@ -57,9 +64,7 @@ function SideBar({}: Props) {
                   duration: 0.2,
                 }}
                 className="absolute left-0 top-0 -z-10 h-full w-full rounded-md bg-accent"
-              >
-                <div className="h-full w-1 bg-foreground"></div>
-              </motion.span>
+              ></motion.span>
             )}
           </Link>
         </React.Fragment>

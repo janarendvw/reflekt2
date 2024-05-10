@@ -7,7 +7,6 @@ import { ReflectionModelType } from '@prisma/client'
 import { Button } from '@/components/ui/button'
 import { createReflection } from '@/app/server/actions/reflection'
 import { useSession } from 'next-auth/react'
-import { redirect } from 'next/navigation'
 
 type reflectionModelStructure = {
   DEFAULT: string[]
@@ -31,6 +30,7 @@ const reflectionModelStructure = {
 function Page({ params }: { params: { model: ReflectionModelType } }) {
   const [title, setTitle] = useState<string>('')
   const [content, setContent] = useState<string[]>([])
+  const [pending, setPending] = useState<boolean>(false)
   const session = useSession()
 
   const handleSubmit = async () => {
@@ -40,8 +40,8 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
       reflectionType: params.model,
       authorId: session?.data?.user?.id,
     }
-
-    await createReflection(reflection)
+    setPending(true)
+    await createReflection(reflection).finally(() => setPending(false))
   }
 
   return (
@@ -60,7 +60,7 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
             index={index}
           />
         ))}
-        <Button onClick={() => handleSubmit()} className="w-32 self-end">Save</Button>
+        <Button disabled={pending} onClick={() => handleSubmit()} className="w-32 self-end">Save</Button>
       </div>
     </div>
   )

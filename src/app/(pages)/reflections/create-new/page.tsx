@@ -9,13 +9,17 @@ type Props = {
   index: number
 }
 
-function BigButton ({model, index}: Props) {
+function BigButton({ model, index }: Props) {
   return (
     <Link href={`./create-new/${model.toString()}`}>
-      <motion.div initial={{opacity: 0}} animate={{opacity:1}} transition={{delay: index*0.1}} className="flex aspect-square w-56 items-center justify-center rounded bg-secondary text-lg font-semibold hover:bg-foreground hover:text-background">
-      {model.toString()}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.7 }}
+        animate={{ opacity: 1, scale: 1 }}
+        whileHover={{ scale: 1.05, shadow: '10px' }}
+        className="flex aspect-square w-56 items-center justify-center rounded-md bg-secondary text-lg font-semibold hover:bg-foreground hover:text-background"
+      >
+        {model.toString()}
       </motion.div>
-
     </Link>
   )
 }

@@ -21,6 +21,7 @@ import { ColumnDef } from '@tanstack/react-table'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import React from 'react'
+import { EllipsisVertical, Zap } from 'lucide-react'
 
 export const columns: ColumnDef<Reflection>[] = [
   {
@@ -46,7 +47,7 @@ export const columns: ColumnDef<Reflection>[] = [
     cell: ({ row }) => (
       <Link
         href={`/reflections/${row.original.id.toString()}`}
-        className="font-semibold hover:underline line-clamp-1"
+        className="line-clamp-1 font-semibold hover:underline"
       >
         {row.original.title}
       </Link>
@@ -56,10 +57,17 @@ export const columns: ColumnDef<Reflection>[] = [
     header: 'Skills',
     accessorKey: 'skills',
     cell: ({ row }) => (
-      <Badge className="font-semibold">
-        {row.original.skills[0]}{' '}
-        {row.original.skills.length > 1 && `+${row.original.skills.length - 1}`}
-      </Badge>
+      <>
+        {row.original.skills.length ? (
+          <Badge className="font-semibold">
+            {row.original.skills[0]}{' '}
+            {row.original.skills.length > 1 &&
+              `+${row.original.skills.length - 1}`}
+          </Badge>
+        ) : (
+          '-'
+        )}
+      </>
     ),
   },
   {
@@ -70,10 +78,12 @@ export const columns: ColumnDef<Reflection>[] = [
       return (
         <>
           {actionPoints && actionPoints.length > 0 ? (
-            <HoverCard>
+            <HoverCard openDelay={1}>
               <HoverCardTrigger>
-                <Badge variant={'outline'} className="font-mono">
-                  {actionPoints.length} points
+                <Badge
+                  className="flex w-fit items-center hover:animate-pulse gap-2 font-mono"
+                >
+                  <Zap size={14} /> {actionPoints.length}
                 </Badge>
               </HoverCardTrigger>
               <HoverCardContent className="w-80">
@@ -82,27 +92,26 @@ export const columns: ColumnDef<Reflection>[] = [
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ y: '-30%', opacity: 0 }}
                 >
-                  <Card>
-                    <CardHeader>
-                      <CardTitle>Action Points</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-col gap-2">
-                        {actionPoints.map((actionPoint: any, index) => {
-                          return (
-                            <React.Fragment key={actionPoint.id}>
-                              {index !== 0 && <Separator />}
-                              <Link href={`/action-points/${actionPoint.id}`}>
-                                <span className="font-muted-foreground underline">
-                                  {actionPoint.title}
-                                </span>
-                              </Link>
-                            </React.Fragment>
-                          )
-                        })}
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <div className="flex flex-col gap-1 rounded-xl border border-border bg-background/50 backdrop-blur-lg p-4">
+                    {actionPoints.map((actionPoint: any, index) => {
+                      return (
+                        <motion.div
+                        initial={{ x: '-30%', opacity: 0}}
+                        animate={{ x: 0, opacity: 1}}
+                        transition={{delay: index * 0.1}}
+                          className="border border-border bg-background shadow p-3 rounded-md"
+                          key={actionPoint.id}
+                        >
+                          {index !== 0 && <Separator />}
+                          <Link href={`/action-points/${actionPoint.id}`}>
+                            <span className="font-muted-foreground hover:underline line-clamp-1">
+                            <Zap className='inline mr-2' size={14}/>  {actionPoint.title}
+                            </span>
+                          </Link>
+                        </motion.div>
+                      )
+                    })}
+                  </div>
                 </motion.div>
               </HoverCardContent>
             </HoverCard>
@@ -120,7 +129,7 @@ export const columns: ColumnDef<Reflection>[] = [
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="font-bold">
-            &#8285;
+            <EllipsisVertical size={14} />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>

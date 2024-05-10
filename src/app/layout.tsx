@@ -52,7 +52,7 @@ export default async function RootLayout({
                 className="relative"
               >
                 {' '}
-                <div className="flex w-full items-center bg-secondary shadow px-4 py-2">
+                <div className="flex w-full items-center border-b border-secondary bg-secondary/50 shadow px-4 py-2">
                   <NavbarBreadcrumb />
                 </div>
                 <main

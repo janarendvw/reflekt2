@@ -5,7 +5,9 @@ type Props = {}
 
 function loading({}: Props) {
   return (
-    <Skeleton className='w-full h-screen' />
+   <>
+    <Skeleton className='w-full h-10' />
+    <Skeleton className='w-full h-10 mt-8' /></>
   )
 }
 

@@ -3,7 +3,7 @@ import React from 'react'
 
 type Props = {}
 
-async function loading({}: Props) {
+function loading({}: Props) {
   return (
     <div className="flex flex-col gap-4 mx-auto items-center">
               <Skeleton className='h-10 w-56' />

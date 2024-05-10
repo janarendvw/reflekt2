@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { motion } from 'framer-motion'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -32,7 +33,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div className="rounded border">
+    <motion.div layoutId='data-table' initial={{opacity: 0.1}} animate={{opacity:1}} exit={{opacity: 0}} transition={{duration: 0.15}} className="rounded-md border">
       <Table className='max-h-full h-full'>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -75,6 +76,6 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-    </div>
+    </motion.div>
   )
 }
