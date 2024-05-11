@@ -1,6 +1,6 @@
 'use client'
 
-import { deleteActionpointById } from '@/app/server/actions/action-point'
+import { deleteActionPointById } from '@/app/server/actions/action-point'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -41,7 +41,7 @@ export const columns: ColumnDef<ActionPoint>[] = [
     cell: ({ row }) => (
       <Link
         href={`/action-points/${row.original.id.toString()}`}
-        className="line-clamp-1 font-semibold"
+        className="line-clamp-1 font-semibold hover:underline"
       >
         {row.original.title}
       </Link>
@@ -51,13 +51,7 @@ export const columns: ColumnDef<ActionPoint>[] = [
     header: 'Status',
     accessorKey: 'resolved',
     cell: ({ row }) => (
-      <Badge
-        className={cn({
-          'bg-green-600': row.original.resolved,
-          'border border-foreground/50 bg-transparent text-foreground':
-            !row.original.resolved,
-        })}
-      >
+      <Badge variant={row.original.resolved ? 'default' : 'outline'}>
         {row.original.resolved ? (
           <span className="flex items-center gap-2">
             <CircleCheck size={14} /> Resolved
@@ -86,7 +80,7 @@ export const columns: ColumnDef<ActionPoint>[] = [
             <button
               className={'flex w-full text-red-400'}
               onClick={() => {
-                deleteActionpointById(row.original.id).then(() =>
+                deleteActionPointById(row.original.id).then(() =>
                   window.location.reload(),
                 )
               }}

@@ -34,7 +34,7 @@ function SideBar({}: Props) {
     <div className="flex flex-col items-center gap-1 p-1">
       <Link
         href={'/reflections/create-new'}
-        className="flex w-full items-center justify-start gap-2 rounded-md bg-orange-500 px-4 py-3 text-sm font-medium tracking-wide text-white"
+        className="flex w-full items-center justify-start gap-2 rounded-md bg-primary px-4 py-3 text-sm font-medium tracking-wide text-primary-foreground"
       >
         <Sparkle size={20} /> Create new
       </Link>

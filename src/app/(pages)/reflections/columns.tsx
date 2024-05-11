@@ -59,7 +59,7 @@ export const columns: ColumnDef<Reflection>[] = [
     cell: ({ row }) => (
       <>
         {row.original.skills.length ? (
-          <Badge className="font-semibold">
+          <Badge variant={'secondary'} className="font-semibold">
             {row.original.skills[0]}{' '}
             {row.original.skills.length > 1 &&
               `+${row.original.skills.length - 1}`}
@@ -78,11 +78,9 @@ export const columns: ColumnDef<Reflection>[] = [
       return (
         <>
           {actionPoints && actionPoints.length > 0 ? (
-            <HoverCard openDelay={1}>
+            <HoverCard openDelay={1} closeDelay={0}>
               <HoverCardTrigger>
-                <Badge
-                  className="flex w-fit items-center hover:animate-pulse gap-2 font-mono"
-                >
+                <Badge className="flex w-fit items-center gap-2 font-mono hover:animate-pulse">
                   <Zap size={14} /> {actionPoints.length}
                 </Badge>
               </HoverCardTrigger>
@@ -92,20 +90,21 @@ export const columns: ColumnDef<Reflection>[] = [
                   animate={{ scale: 1, opacity: 1 }}
                   exit={{ y: '-30%', opacity: 0 }}
                 >
-                  <div className="flex flex-col gap-1 rounded-xl border border-border bg-background/50 backdrop-blur-lg p-4">
+                  <div className="flex flex-col gap-1 rounded-xl border border-border bg-background/80 p-4">
                     {actionPoints.map((actionPoint: any, index) => {
                       return (
                         <motion.div
-                        initial={{ x: '-30%', opacity: 0}}
-                        animate={{ x: 0, opacity: 1}}
-                        transition={{delay: index * 0.1}}
-                          className="border border-border bg-background shadow p-3 rounded-md"
+                          initial={{ y: '-30%', opacity: 0 }}
+                          animate={{ y: 0, opacity: 1 }}
+                          transition={{ delay: index * 0.05 }}
+                          className="rounded-md border border-border bg-background p-3 shadow hover:bg-secondary"
                           key={actionPoint.id}
                         >
                           {index !== 0 && <Separator />}
                           <Link href={`/action-points/${actionPoint.id}`}>
-                            <span className="font-muted-foreground hover:underline line-clamp-1">
-                            <Zap className='inline mr-2' size={14}/>  {actionPoint.title}
+                            <span className="font-muted-foreground line-clamp-1 hover:underline">
+                              <Zap className="mr-2 inline " size={14} />{' '}
+                              {actionPoint.title}
                             </span>
                           </Link>
                         </motion.div>

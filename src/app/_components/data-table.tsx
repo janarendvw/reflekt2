@@ -6,7 +6,6 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-
 import {
   Table,
   TableBody,
@@ -33,8 +32,8 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <motion.div layoutId='data-table' initial={{opacity: 0.1}} animate={{opacity:1}} exit={{opacity: 0}} transition={{duration: 0.15}} className="rounded-md border">
-      <Table className='max-h-full h-full'>
+    <div className="rounded-md border">
+      <Table className="h-full max-h-full">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
@@ -53,16 +52,25 @@ export function DataTable<TData, TValue>({
             </TableRow>
           ))}
         </TableHeader>
-        <TableBody className='overflow-scroll'>
+        <TableBody className="overflow-scroll">
           {table.getRowModel().rows?.length ? (
             table.getRowModel().rows.map((row) => (
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && 'selected'}
               >
-                {row.getVisibleCells().map((cell) => (
+                {row.getVisibleCells().map((cell, index) => (
                   <TableCell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    <motion.div
+                      initial={{ y: 10, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext(),
+                      )}
+                    </motion.div>
                   </TableCell>
                 ))}
               </TableRow>
@@ -76,6 +84,6 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-    </motion.div>
+    </div>
   )
 }

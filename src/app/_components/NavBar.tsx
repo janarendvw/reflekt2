@@ -12,13 +12,13 @@ function AuthButton() {
 
   if (session) {
     return (
-      <Button size={'sm'} variant={"outline"} onClick={() => signOut()}>
+      <Button size={'sm'} variant={'outline'} onClick={() => signOut()}>
         Sign out
       </Button>
     )
   } else {
     return (
-      <Button size={'sm'} variant={"outline"} onClick={() => signIn()}>
+      <Button size={'sm'} variant={'outline'} onClick={() => signIn()}>
         Sign in
       </Button>
     )

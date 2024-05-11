@@ -1,24 +1,75 @@
 import prisma from '@/lib/client'
 import React from 'react'
 import { ReflectionContent } from './_components/ReflectionContent'
+import { Separator } from '@/components/ui/separator'
 
-async function page({params}: {params: {reflection: string}}) {
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+import { Zap } from 'lucide-react'
 
-    const reflection = await prisma.reflection.findUnique({
-        where: {
-            id: Number(params.reflection)
-        }
-    }).then((res) => {
-        return res ?? undefined
-    }
-    )
+async function page({ params }: { params: { reflection: string } }) {
+  const reflection = await prisma.reflection
+    .findUnique({
+      where: {
+        id: Number(params.reflection),
+      },
+      include: {
+        actionPoints: true,
+      },
+    })
+    .then((res) => {
+      return res ?? undefined
+    })
+
+  const resolvedActionPoints = reflection?.actionPoints.filter(
+    (ap) => ap.resolved,
+  )
+  const unresolvedActionPoints = reflection?.actionPoints.filter(
+    (ap) => !ap.resolved,
+  )
 
   return (
-    <div className='flex flex-col mx-auto max-w-screen-md w-full'>
-      <h1 className='text-2xl font-semibold capitalize'>{reflection?.title}</h1>
-      <p className='text-sm text-gray-500 mb-4 font-mono'>{reflection?.createdAt.toLocaleDateString()} - {reflection?.reflectionType} model</p>
-     <ReflectionContent content={reflection?.content ?? []} />
-      </div>
+    <div className="mx-auto flex w-full max-w-screen-md flex-col">
+      <h1 className="text-2xl font-semibold capitalize">{reflection?.title}</h1>
+      <p className="mb-4 font-mono text-sm text-gray-500">
+        {reflection?.createdAt.toLocaleDateString()} -{' '}
+        {reflection?.reflectionType} model
+      </p>
+      <ReflectionContent content={reflection?.content ?? []} />
+      <h2 className="mb-4 mt-14 font-semibold">Unresolved action points</h2>
+      <Accordion type="single" collapsible className="w-full">
+        {unresolvedActionPoints?.map((ap) => (
+          <AccordionItem key={ap.content} value={ap.title}>
+            <AccordionTrigger>
+              <span className="flex items-center gap-2">
+                <Zap size={16} />
+                {ap.title}
+              </span>
+            </AccordionTrigger>
+            <AccordionContent>{ap.content}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+      <h2 className="mb-4 mt-14 font-semibold">Resolved action points</h2>
+      <Accordion type="single" collapsible className="w-full">
+        {resolvedActionPoints?.map((ap) => (
+          <AccordionItem key={ap.content} value={ap.title}>
+            <AccordionTrigger>
+              <span className="flex items-center gap-2">
+                <Zap size={16} className="fill-foreground" />
+                {ap.title}
+              </span>
+            </AccordionTrigger>
+            <AccordionContent>{ap.content}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </div>
   )
 }
 

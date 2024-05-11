@@ -10,6 +10,7 @@ async function page({}: Props) {
   const session = await auth()
 
   const reflections = await prisma.reflection.findMany({
+    take: 10,
     where: {
       authorId: session?.user?.id ?? '',
     },

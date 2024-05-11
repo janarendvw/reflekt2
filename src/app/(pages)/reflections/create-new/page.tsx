@@ -16,6 +16,7 @@ function BigButton({ model, index }: Props) {
         initial={{ opacity: 0, scale: 0.7 }}
         animate={{ opacity: 1, scale: 1 }}
         whileHover={{ scale: 1.05, shadow: '10px' }}
+        whileTap={{ scale: 0.95 }}
         className="flex aspect-square w-56 items-center justify-center rounded-md bg-secondary text-lg font-semibold hover:bg-foreground hover:text-background"
       >
         {model.toString()}

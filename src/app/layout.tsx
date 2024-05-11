@@ -57,7 +57,7 @@ export default async function RootLayout({
                 </div>
                 <main
                   style={{ maxHeight: 'calc(100vh - 70px)' }}
-                  className="container flex flex-col gap-8 overflow-y-auto py-20"
+                  className="container flex flex-col overflow-y-auto py-20"
                 >
                   {children}
                 </main>

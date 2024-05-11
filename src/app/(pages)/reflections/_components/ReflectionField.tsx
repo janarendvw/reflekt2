@@ -1,6 +1,7 @@
 'use client'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { motion } from 'framer-motion'
 import React from 'react'
 
 type Props = {
@@ -26,19 +27,22 @@ function ReflectionField({
   }
 
   return (
-    <div>
+    <motion.div
+      initial={{ x: '-30%', opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ delay: 0.05 * index }}
+    >
       <Label className="capitalize" htmlFor={`id-for-${label}`}>
         {label}
       </Label>
       <Textarea
-        className="h-24"
         id={`id-for-${label}`}
         placeholder={placeholder}
         value={content[index]}
         onChange={(e) => handleContentChange(index, e.target.value)}
         required
       />
-    </div>
+    </motion.div>
   )
 }
 

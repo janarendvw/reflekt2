@@ -4,11 +4,8 @@ import prisma from '@/lib/client'
 import React from 'react'
 import { columns } from './columns'
 
-type Props = {}
-
-async function page({}: Props) {
+async function page() {
   const session = await auth()
-
   const actionPoints = await prisma.actionPoint.findMany({
     orderBy: {
       createdAt: 'desc',
