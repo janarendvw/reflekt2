@@ -19,3 +19,8 @@ export async function deleteActionPointById(id: number) {
   })
   return res
 }
+
+export async function getTotalActionPointCount() {
+  const res = await prisma.actionPoint.count()
+  return res
+}

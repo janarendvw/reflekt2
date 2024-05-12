@@ -37,33 +37,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <SessionProvider session={session}>
-          <main className="flex h-screen flex-col">
-            <NavBar />
-
-            <Separator />
-            <ResizablePanelGroup direction="horizontal">
-              <ResizablePanel defaultSize={10}>
-                <SideBar />
-              </ResizablePanel>
-              <ResizableHandle />
-              <ResizablePanel
-                style={{ maxHeight: 'calc(100vh - 70px)' }}
-                defaultSize={85}
-                className="relative"
-              >
-                {' '}
-                <div className="flex w-full items-center border-b border-secondary bg-secondary/50 shadow px-4 py-2">
-                  <NavbarBreadcrumb />
-                </div>
-                <main
-                  style={{ maxHeight: 'calc(100vh - 70px)' }}
-                  className="container flex flex-col overflow-y-auto py-20"
-                >
-                  {children}
-                </main>
-              </ResizablePanel>
-            </ResizablePanelGroup>
-          </main>
+         {children}
         </SessionProvider>
       </body>
     </html>

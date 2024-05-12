@@ -45,7 +45,7 @@ function NavBar({}: Props) {
         <Avatar>
           <AvatarImage src={image} />
           <AvatarFallback>
-            {session?.data?.user?.name?.[0] ?? ''}
+            {session?.data?.user?.name?.[0].toUpperCase() ?? ''}
           </AvatarFallback>
         </Avatar>
         <AuthButton />

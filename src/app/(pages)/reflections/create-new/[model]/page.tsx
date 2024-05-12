@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button'
 import { createReflection } from '@/app/server/actions/reflection'
 import { useSession } from 'next-auth/react'
 import {
+  Info,
   PartyPopper,
   PlusCircle,
   Save,
@@ -27,6 +28,9 @@ import {
 } from '@/components/ui/dialog'
 import { Textarea } from '@/components/ui/textarea'
 import { set } from 'react-hook-form'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { AnimatePresence, motion } from 'framer-motion'
 
 type reflectionModelStructure = {
   DEFAULT: string[]
@@ -66,7 +70,9 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
       authorId: session?.data?.user?.id,
     }
     setPending(true)
-    await createReflection(reflection, actionPoints).finally(() => setPending(false))
+    await createReflection(reflection, actionPoints).finally(() =>
+      setPending(false),
+    )
   }
 
   const addActionPoint = () => {
@@ -76,6 +82,11 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
     ])
     setActionPointTitle('')
     setActionPointContent('')
+  }
+
+  const deleteActionPoint = (index: number) => {
+    const newActionPoints = actionPoints.filter((_, i) => i !== index)
+    setActionPoints(newActionPoints)
   }
 
   return (
@@ -113,36 +124,71 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
         </div>
       </h1>
       <div className="my-8 flex flex-col gap-4">
-        {actionPoints.length ? (
-          actionPoints.map((actionPoint) => {
-            return (
-              <div key={actionPoint.title} className="flex flex-col gap-2">
-                <span className="font-semibold">{actionPoint.title}</span>
-                <span>{actionPoint.content}</span>
-              </div>
-            )
-          })
-        ) : (
-          <span className="text-muted-foreground">
-            No action-points have been added yet...{' '}
-          </span>
-        )}
+        <AnimatePresence mode="sync">
+          {actionPoints.length ? (
+            actionPoints.map((actionPoint, index) => {
+              return (
+                <motion.div
+                  key={actionPoint.title}
+                  layoutId={actionPoint.title}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                  className="line-clamp-1 flex items-center justify-between gap-2 rounded-md border border-border px-4 py-2"
+                >
+                  <div className="flex items-center gap-2">
+                    <Zap />
+                    <div>
+                      <h4 className="line-clamp-1 font-semibold capitalize">
+                        {actionPoint.title}
+                      </h4>
+                      <p className="line-clamp-1">{actionPoint.content}</p>
+                    </div>
+                  </div>
+                  <Button
+                    variant={'destructive'}
+                    size={'sm'}
+                    onClick={() => deleteActionPoint(index)}
+                  >
+                    Remove
+                  </Button>
+                </motion.div>
+              )
+            })
+          ) : (
+            <span className="text-muted-foreground">
+              No action-points have been added yet...{' '}
+            </span>
+          )}
+        </AnimatePresence>
 
         <Dialog>
           <DialogTrigger asChild>
             <Button
-              variant={'outline'}
+              variant={actionPoints.length < 1 ? 'default' : 'outline'}
               className="flex w-fit items-center gap-2"
             >
-              <PlusCircle size={16} /> Add one
+              <PlusCircle size={16} /> {actionPoints.length > 0 ? 'Add another' : 'Add one'}
             </Button>
           </DialogTrigger>
           <DialogContent className="container">
             <DialogHeader>
               <DialogTitle>Create new action-point</DialogTitle>
               <DialogDescription>
-                Think of a small action that can be taken to improve any aspect
-                of your reflection. Make it tangible!
+                <Alert
+                  variant={'default'}
+                  className="text-info-foreground bg-info"
+                >
+                  <Info className="stroke-info-foreground" />
+                  <AlertTitle>
+                    Want a little help creating amazing and tangible goals?
+                    {'//TODO: add link to action-point guide here'}
+                  </AlertTitle>
+                  <AlertDescription>
+                    <u>Check it here</u>
+                  </AlertDescription>
+                </Alert>
               </DialogDescription>
             </DialogHeader>
             <div>
@@ -182,6 +228,7 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
         </div>
       </h1>
       <Button
+        variant={actionPoints.length > 0 ? 'default' : 'outline'}
         onClick={() => handleSubmit()}
         className="flex w-32 items-center gap-2"
       >
