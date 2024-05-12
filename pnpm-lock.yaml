@@ -5,8 +5,11 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@auth/core':
+    specifier: ^0.31.0
+    version: 0.31.0
   '@auth/prisma-adapter':
-    specifier: ^2.0.0
+    specifier: ^2.1.0
     version: 2.1.0(@prisma/client@5.13.0)
   '@hookform/resolvers':
     specifier: ^3.3.4

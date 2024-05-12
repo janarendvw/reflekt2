@@ -10,7 +10,12 @@ type Props = {
 function MatrixBackgound({size = 12, characters = true, smooth = true}:Props) {
     let fontSize = size;
     let lineHeight = 2;
-    let rows = useMemo(() => Math.floor((window.innerHeight / (fontSize + lineHeight))), [fontSize, lineHeight]);
+    let rows = useMemo(() => {
+        if (typeof window !== "undefined") {
+            return Math.floor((window.innerHeight / (fontSize + lineHeight)));
+        }
+        return 0;
+    }, [fontSize, lineHeight]);
     let [rowsElements, setRowsElements] = useState<JSX.Element[]>([]);
     const randomNumber = useRef(0);
     useLayoutEffect(() => {
@@ -70,7 +75,7 @@ function MatrixBackgound({size = 12, characters = true, smooth = true}:Props) {
       return () => {
         ids.forEach(clearInterval);
       };
-    }, []);
+    }, [characters, fontSize, lineHeight, rows, smooth]);
   return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
