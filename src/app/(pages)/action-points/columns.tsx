@@ -34,6 +34,7 @@ export const columns: ColumnDef<ActionPoint>[] = [
         {new Date(row.original.createdAt).toLocaleDateString()}
       </span>
     ),
+    size: 10,
   },
   {
     header: 'Title',
@@ -46,6 +47,8 @@ export const columns: ColumnDef<ActionPoint>[] = [
         {row.original.title}
       </Link>
     ),
+    size: 70,
+    enableResizing: true,
   },
   {
     header: 'Status',
@@ -66,7 +69,7 @@ export const columns: ColumnDef<ActionPoint>[] = [
     ),
   },
   {
-    header: 'Actions',
+    header: '',
     accessorKey: 'id',
     cell: ({ row }) => (
       <DropdownMenu>

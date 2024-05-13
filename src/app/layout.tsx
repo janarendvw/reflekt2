@@ -28,11 +28,6 @@ export default async function RootLayout({
 }>) {
   const session = await auth()
 
-  if (!session) {
-    redirect('/api/auth/signin')
-    return null
-  }
-
   return (
     <html lang="en">
       <body className={inter.className}>

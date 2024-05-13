@@ -4,12 +4,21 @@ import React from 'react'
 import NavBar from '../_components/NavBar'
 import NavbarBreadcrumb from '../_components/NavBarBreadcrumb'
 import SideBar from '../_components/SideBar'
+import { auth } from '@/auth'
+import { redirect } from 'next/navigation'
 
 type MainLayoutProps = {
     children: React.ReactNode
 }
 
 async function Layout({children}: MainLayoutProps) {
+  const session = await auth()
+  
+  if (!session) {
+    redirect('/api/auth/signin')
+    return null
+  }
+
   return (
     <main className="flex h-screen flex-col">
     <NavBar />

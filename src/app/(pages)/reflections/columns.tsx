@@ -35,11 +35,13 @@ export const columns: ColumnDef<Reflection>[] = [
         {new Date(row.original.createdAt).toLocaleDateString()}
       </span>
     ),
+    size: 10
   },
   {
     header: 'Type',
     accessorKey: 'reflectionType',
     cell: ({ row }) => row.original.reflectionType,
+    size: 10
   },
   {
     header: 'Title',
@@ -52,23 +54,8 @@ export const columns: ColumnDef<Reflection>[] = [
         {row.original.title}
       </Link>
     ),
-  },
-  {
-    header: 'Skills',
-    accessorKey: 'skills',
-    cell: ({ row }) => (
-      <>
-        {row.original.skills.length ? (
-          <Badge variant={'secondary'} className="font-semibold">
-            {row.original.skills[0]}{' '}
-            {row.original.skills.length > 1 &&
-              `+${row.original.skills.length - 1}`}
-          </Badge>
-        ) : (
-          '-'
-        )}
-      </>
-    ),
+    size: 60,
+    maxSize: 100,
   },
   {
     header: 'actionpoints',
@@ -122,7 +109,7 @@ export const columns: ColumnDef<Reflection>[] = [
     },
   },
   {
-    header: 'Actions',
+    header: '',
     accessorKey: 'id',
     cell: ({ row }) => (
       <DropdownMenu>

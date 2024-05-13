@@ -4,6 +4,7 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from '@tanstack/react-table'
 import {
@@ -29,23 +30,37 @@ export function DataTable<TData, TValue>({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (
     <div className="rounded-md border">
-      <Table className="h-full max-h-full">
+      <Table className="h-full max-h-full overflow-hidden">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
                 return (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
+                  <TableHead
+                    style={{ width: `${header.getSize()}%` }}
+                    key={header.id}
+                  >
+                    <motion.div
+                      initial={{ y: 40, opacity: -5 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{
+                        type: 'tween',
+                        duration: 0.3,
+                      }}
+                      layoutId={header.id}
+                    >
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                          )}
+                    </motion.div>
                   </TableHead>
                 )
               })}
@@ -62,9 +77,13 @@ export function DataTable<TData, TValue>({
                 {row.getVisibleCells().map((cell, index) => (
                   <TableCell key={cell.id}>
                     <motion.div
-                      initial={{ y: 10, opacity: 0 }}
+                      initial={{ y: 40, opacity: -5 }}
                       animate={{ y: 0, opacity: 1 }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{
+                        delay: index * 0.05,
+                        type: 'tween',
+                        duration: 0.3,
+                      }}
                     >
                       {flexRender(
                         cell.column.columnDef.cell,
