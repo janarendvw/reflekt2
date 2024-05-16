@@ -16,15 +16,18 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { motion } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  className?: string
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  className
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -33,8 +36,9 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   })
 
+
   return (
-    <div className="rounded-md border">
+    <div className={cn(className, 'rounded-md border')}>
       <Table className="h-full max-h-full overflow-hidden">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (

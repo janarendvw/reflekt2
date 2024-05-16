@@ -2,7 +2,7 @@
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
-import { FlipHorizontal2, Home, Sparkle, Zap } from 'lucide-react'
+import { FlipHorizontal2, Hash, Home, Sparkle, Zap } from 'lucide-react'
 import { headers } from 'next/headers'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -26,6 +26,11 @@ const links = [
     href: '/action-points',
     icon: <Zap size={20} className=''/>,
   },
+  {
+    name: 'Tags',
+    href: '/tags',
+    icon: <Hash size={20} />,
+  }
 ]
 
 function SideBar({}: Props) {

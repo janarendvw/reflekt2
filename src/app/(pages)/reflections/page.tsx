@@ -19,8 +19,11 @@ async function page({}: Props) {
     },
     include:{
       actionPoints: true,
+      tags: true,
     }
   })
+
+  const tags = reflections.map((reflection) => reflection.tags)
 
   return (
     <div>

@@ -5,7 +5,7 @@ import { getTotalActionPointCount } from './server/actions/action-point'
 import MatrixBackgound from './_components/matrix-background'
 import { useRouter } from 'next/navigation'
 import { Book, ChevronRight, Redo, Rocket } from 'lucide-react'
-import { useEffect, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 
 export default function Home() {
   const router = useRouter()

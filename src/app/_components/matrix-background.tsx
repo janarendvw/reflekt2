@@ -1,5 +1,5 @@
 'use client'
-import React, { useLayoutEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap"
 type Props = {
   size?: number;
@@ -8,17 +8,21 @@ type Props = {
 };
 
 function MatrixBackgound({size = 12, characters = true, smooth = true}:Props) {
+  let [windowWidth, windowHeight] = [useRef(0), useRef(0)];
+  window && (windowWidth.current = window.innerWidth);
+  window && (windowHeight.current = window.innerHeight);
+
     let fontSize = size;
     let lineHeight = 2;
     let rows = useMemo(() => {
         if (typeof window !== "undefined") {
-            return Math.floor((window.innerHeight / (fontSize + lineHeight)));
+            return Math.floor((windowHeight.current / (fontSize + lineHeight)));
         }
         return 0;
-    }, [fontSize, lineHeight]);
+    }, [fontSize, lineHeight, windowHeight]);
     let [rowsElements, setRowsElements] = useState<JSX.Element[]>([]);
     const randomNumber = useRef(0);
-    useLayoutEffect(() => {
+    useEffect(() => {
         
       let elements: JSX.Element[] = [];
       let ids: number[] = [];
@@ -80,8 +84,8 @@ function MatrixBackgound({size = 12, characters = true, smooth = true}:Props) {
       <svg
         xmlns="http://www.w3.org/2000/svg"
         version="1.1"
-        viewBox={`0 0 ${window.innerWidth} ${window.innerHeight}`}
-        height={window.innerHeight}
+        viewBox={`0 0 ${windowWidth.current} ${windowHeight.current}`}
+        height={windowHeight.current}
         
       >
         {rowsElements}

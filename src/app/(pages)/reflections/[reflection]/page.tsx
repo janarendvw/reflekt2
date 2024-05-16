@@ -42,33 +42,23 @@ async function page({ params }: { params: { reflection: string } }) {
       </p>
       <ReflectionContent content={reflection?.content ?? []} />
       <h2 className="mb-4 mt-14 font-semibold">Unresolved action points</h2>
-      <Accordion type="single" collapsible className="w-full">
-        {unresolvedActionPoints?.map((ap) => (
-          <AccordionItem key={ap.content} value={ap.title}>
-            <AccordionTrigger>
-              <span className="flex items-center gap-2">
-                <Zap size={16} />
-                {ap.title}
-              </span>
-            </AccordionTrigger>
-            <AccordionContent>{ap.content}</AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      {unresolvedActionPoints?.map((ap) => (
+        <Card key={ap.content} className="mb-4">
+          <CardHeader>
+            <CardTitle>{ap.title}</CardTitle>
+          </CardHeader>
+          <CardContent>{ap.content}</CardContent>
+        </Card>
+      ))}
       <h2 className="mb-4 mt-14 font-semibold">Resolved action points</h2>
-      <Accordion type="single" collapsible className="w-full">
-        {resolvedActionPoints?.map((ap) => (
-          <AccordionItem key={ap.content} value={ap.title}>
-            <AccordionTrigger>
-              <span className="flex items-center gap-2">
-                <Zap size={16} className="fill-foreground" />
-                {ap.title}
-              </span>
-            </AccordionTrigger>
-            <AccordionContent>{ap.content}</AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+      {resolvedActionPoints?.map((ap) => (
+        <Card key={ap.content} className="mb-4">
+          <CardHeader>
+            <CardTitle>{ap.title}</CardTitle>
+          </CardHeader>
+          <CardContent>{ap.content}</CardContent>
+        </Card>
+      ))}
     </div>
   )
 }

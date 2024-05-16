@@ -83,9 +83,7 @@ export const columns: ColumnDef<ActionPoint>[] = [
             <button
               className={'flex w-full text-red-400'}
               onClick={() => {
-                deleteActionPointById(row.original.id).then(() =>
-                  window.location.reload(),
-                )
+                deleteActionPointById(row.original.id)
               }}
             >
               Delete
