@@ -39,7 +39,7 @@ async function Layout({children}: MainLayoutProps) {
         </div>
         <main
           style={{ maxHeight: 'calc(100vh - 70px)' }}
-          className="container flex flex-col overflow-y-auto py-20"
+          className="container h-full flex flex-col overflow-y-auto py-20"
         >
           {children}
         </main>

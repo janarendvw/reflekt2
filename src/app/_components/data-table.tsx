@@ -54,7 +54,7 @@ export function DataTable<TData, TValue>({
                       animate={{ y: 0, opacity: 1 }}
                       transition={{
                         type: 'tween',
-                        duration: 0.3,
+                        duration: 0.15,
                       }}
                       layoutId={header.id}
                     >
@@ -86,7 +86,7 @@ export function DataTable<TData, TValue>({
                       transition={{
                         delay: index * 0.05,
                         type: 'tween',
-                        duration: 0.3,
+                        duration: 0.15,
                       }}
                     >
                       {flexRender(

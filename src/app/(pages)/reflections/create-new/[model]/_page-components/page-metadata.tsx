@@ -12,7 +12,7 @@ function PageMetadata({ title, setTitle }: Props) {
   return (
     <>
       <h1 className="relative mb-8 flex items-center gap-2 text-2xl font-semibold">
-        Create a new reflection <Sparkles />
+        Create a new title for your reflection <Sparkles />
         <div className="absolute -left-16 top-1/2 flex aspect-square -translate-y-1/2 items-center justify-center rounded-md border border-border px-2 text-sm text-muted-foreground">
           1
         </div>

@@ -25,11 +25,12 @@ async function page() {
   return (
     <div className='grid grid-cols-3 gap-4'>
       <ProgressTracker
-        className="col-span-1"
+        className="col-span-3"
         value={resolvedPercentage}
         title="Resolved action-points"
         description={`${resolvedActionPoints.length} out of ${actionPoints.length} action-points resolved`}
       />
+    
       <DataTable className="col-span-3" columns={columns} data={actionPoints} />
     </div>
   )

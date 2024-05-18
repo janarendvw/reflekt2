@@ -9,12 +9,14 @@ import {
 } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
+import { useEffect, useLayoutEffect, useState } from 'react'
 
 type ProgressTrackerProps = {
   value: number
   title: string
   description: string
   className?: string
+  showProgressBar?: boolean
 }
 
 export default function ProgressTracker({
@@ -22,10 +24,12 @@ export default function ProgressTracker({
   title,
   description,
   className,
+  showProgressBar = true,
 }: ProgressTrackerProps) {
-
-
-
+  const [progress, setProgress] = useState(0)
+  useLayoutEffect(() => {
+    setProgress(value)
+  }, [value])
 
   return (
     <Card className={cn(className, 'rounded-md')}>
@@ -36,9 +40,9 @@ export default function ProgressTracker({
       <CardContent>
         <div className="text-xs text-muted-foreground">{description}</div>
       </CardContent>
-      <CardFooter>
-        <Progress value={value} aria-label={description} />
-      </CardFooter>
+     {showProgressBar && <CardFooter>
+        <Progress value={progress} aria-label={description} />
+      </CardFooter>}
     </Card>
   )
 }
