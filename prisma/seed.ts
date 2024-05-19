@@ -31,6 +31,10 @@ async function main() {
   await prisma.reflection.create({
     data: {
       title: faker.lorem.sentence(),
+      tags: faker.helpers.arrayElements(
+        ['work', 'life', 'career', 'personal', 'development'],
+        Math.floor(Math.random() * 3 + 1),
+      ),
       content: [faker.lorem.paragraph()],
       skills: faker.helpers.arrayElements(
         Object.values(Skills),
@@ -41,6 +45,7 @@ async function main() {
       actionPoints: {
         create: generateActionPoints('clvxn68p00000y9zsozwoitjl'),
       },
+      
       author: {
         connect: {
           id: 'clvxn68p00000y9zsozwoitjl',

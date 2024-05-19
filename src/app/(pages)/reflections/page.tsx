@@ -6,12 +6,14 @@ import { Badge } from '@/components/ui/badge'
 import { getReflections } from '@/app/server/actions/reflection'
 import { Reflection } from '@prisma/client'
 import { Button } from '@/components/ui/button'
+import { motion } from 'framer-motion'
 
 type Props = {}
 
 function Page({}: Props) {
   const [reflections, setReflections] = React.useState<Reflection[]>([])
   const [activeTags, setActiveTags] = React.useState<string[]>([])
+  const [tagButtons, setTagButtons] = React.useState<string[]>([])
   const [filteredReflections, setFilteredReflections] = React.useState<
     Reflection[]
   >([])
@@ -19,36 +21,57 @@ function Page({}: Props) {
     getReflections().then((data) => setReflections(data))
   }, [])
 
-  const uniqueTags = reflections
-    .map((reflection) => reflection.tags)
-    .flat()
-    .filter((tag, index, self) => self.indexOf(tag) === index)
+  React.useEffect(() => {
+    if (activeTags.length === 0) {
+      const tags = reflections.flatMap((reflection) => reflection.tags)
+      const uniqueTags = Array.from(new Set(tags))
+      setTagButtons(uniqueTags)
+    } else {
+      const tags = filteredReflections.flatMap((reflection) => reflection.tags)
+      const uniqueTags = Array.from(new Set(tags))
+      setTagButtons(uniqueTags)
+    }
+  }, [reflections, filteredReflections, activeTags.length])
 
   const filterByTag = (tag: string) => {
-    const filteredReflections = reflections.filter((reflection) =>
-      reflection.tags.includes(tag),
-    )
-    setActiveTags((prev) =>
-      prev.includes(tag)
-        ? prev.filter((activeTag) => activeTag !== tag)
-        : [...prev, tag],
-    )
-    setFilteredReflections(filteredReflections)
+    if (activeTags.includes(tag)) {
+      let updatedTags = activeTags.filter((t) => t !== tag)
+      setActiveTags(updatedTags)
+      updatedTags.forEach((t) => {
+        setFilteredReflections(
+          reflections.filter((reflection) => reflection.tags.includes(t)),
+        )
+      })
+    } else {
+      setActiveTags([...activeTags, tag])
+      if (activeTags.length === 0) {
+        setFilteredReflections(
+          reflections.filter((reflection) => reflection.tags.includes(tag)),
+        )
+      } else {
+        setFilteredReflections(
+          filteredReflections.filter((reflection) =>
+            reflection.tags.includes(tag),
+          ),
+        )
+      }
+    }
   }
 
   return (
     <div>
       <div className="my-4 flex items-center gap-4">
         Filter by tags:
-        {uniqueTags.map((tag) => (
-          <Button
-            onClick={() => filterByTag(tag)}
-            variant={activeTags.includes(tag) ? 'default' : 'outline'}
-            size={'sm'}
-            key={tag}
-          >
-           # {tag}
-          </Button>
+        {tagButtons.map((tag) => (
+          <motion.div key={tag} layoutId={tag} transition={{ duration: 0.15 }}>
+            <Button
+              onClick={() => filterByTag(tag)}
+              variant={activeTags.includes(tag) ? 'default' : 'outline'}
+              size={'sm'}
+            >
+              # {tag}
+            </Button>
+          </motion.div>
         ))}
       </div>
       <DataTable

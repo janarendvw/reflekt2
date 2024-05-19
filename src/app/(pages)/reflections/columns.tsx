@@ -58,6 +58,19 @@ export const columns: ColumnDef<Reflection>[] = [
     maxSize: 100,
   },
   {
+    header: 'Tags',
+    accessorKey: 'tags',
+    cell: ({ row }) => (
+      <div className="flex gap-2">
+        {row.original.tags.map((tag) => (
+          <Badge key={tag} variant="outline" className="text-muted-foreground">
+            {tag}
+          </Badge>
+        ))}
+      </div>
+    ),
+  },
+  {
     header: 'actionpoints',
     accessorKey: 'actionPoints',
     cell: ({ row }) => {
