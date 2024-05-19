@@ -45,36 +45,36 @@ function AddActionPoint({
 
   return (
     <>
-      <AnimatePresence mode="sync">
+      <AnimatePresence mode="popLayout">
         {actionPoints.length ? (
           actionPoints.map((actionPoint, index) => {
             return (
               <motion.div
                 key={actionPoint.title}
-                layoutId={actionPoint.title}
+                layoutId={actionPoint.title + index}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                className="line-clamp-1 flex flex-col items-between justify-center rounded-md border border-border"
+                className="items-between line-clamp-1 flex flex-col justify-center rounded-md border border-border"
               >
-                <div className="flex justify-between border-b border-border p-2">
-                  <div className='flex items-center gap-2'>
+                <div className="flex justify-between bg-secondary border-border px-1 py-1">
+                  <div className="flex items-center gap-2 ml-1">
                     <div>
-                      <Zap />
+                      <Zap size={16} />
                     </div>
-                    <h4 className="text-lg font-semibold">{actionPoint.title}</h4>
+                    <h4 className="font-semibold">{actionPoint.title}</h4>
                   </div>
                   <Button
                     variant={'ghost'}
                     size={'sm'}
                     onClick={() => deleteActionPoint(index)}
-                    className='text-destructive'
+                    className="text-destructive"
                   >
-                   <Trash2 size={16} className='mr-1' /> Remove
+                    <Trash2 size={16} className="mr-1" /> Remove
                   </Button>
                 </div>
-                <p className="text-sm text-muted-foreground p-2">
+                <p className="p-2 text-sm text-muted-foreground">
                   {actionPoint.content}
                 </p>
               </motion.div>

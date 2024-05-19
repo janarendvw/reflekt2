@@ -1,7 +1,8 @@
 'use server'
 
+import { auth } from '@/auth'
 import prisma from '@/lib/client'
-import { ActionPoint, Reflection } from '@prisma/client'
+import { Reflection } from '@prisma/client'
 import { redirect } from 'next/navigation'
 
 export const createReflection = async (
@@ -12,6 +13,7 @@ export const createReflection = async (
     .create({
       data: {
         title: input.title ?? 'Untitled Reflection',
+        tags: input.tags,
         content: input.content,
         reflectionType: input.reflectionType ?? 'DEFAULT',
         author: {
@@ -36,4 +38,20 @@ export const createReflection = async (
     .then(() => {
       redirect('/reflections')
     })
+}
+
+export const getReflections = async () => {
+  const session = await auth()
+  return prisma.reflection.findMany({
+    take: 10,
+    where: {
+      authorId: session?.user?.id ?? '',
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+    include: {
+      actionPoints: true,
+    },
+  })
 }

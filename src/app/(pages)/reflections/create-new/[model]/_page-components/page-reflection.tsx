@@ -1,6 +1,7 @@
 import React from 'react'
 import ReflectionField from '../../../_components/ReflectionField'
 import { ReflectionModelType } from '@prisma/client'
+import { NotebookPen } from 'lucide-react'
 
 type Props = {
     content: string[]
@@ -23,7 +24,10 @@ const reflectionModelStructure = {
 
 function PageReflection({content, setContent, model}: Props) {
   return (
-    <div className="mt-4 flex flex-col gap-2">
+    <div className="flex flex-col gap-2">
+         <h5 className="mb-2 mt-8 flex items-center gap-2 text-lg font-bold">
+      {model === 'DEFAULT' ? 'Write your reflection' : 'Fill in the fields'} <NotebookPen size={16} className="text-muted-foreground" />
+      </h5>
     {reflectionModelStructure[model].map((field, index) => (
       <ReflectionField
         key={field}
