@@ -14,11 +14,14 @@ function Page({}: Props) {
   const [reflections, setReflections] = React.useState<Reflection[]>([])
   const [activeTags, setActiveTags] = React.useState<string[]>([])
   const [tagButtons, setTagButtons] = React.useState<string[]>([])
+  const [pending, setPending] = React.useState<boolean>(true)
   const [filteredReflections, setFilteredReflections] = React.useState<
     Reflection[]
   >([])
   React.useEffect(() => {
-    getReflections().then((data) => setReflections(data))
+    getReflections().then((data) => setReflections(data)).finally(() => {
+      setPending(false)
+    })
   }, [])
 
   React.useEffect(() => {
@@ -77,6 +80,7 @@ function Page({}: Props) {
       <DataTable
         columns={columns}
         data={activeTags.length ? filteredReflections : reflections}
+        pending={pending}
       />
     </div>
   )

@@ -18,16 +18,22 @@ import {
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
+import { quantum } from 'ldrs'
+
+quantum.register()
+
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   className?: string
+  pending?: boolean
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  className
+  className,
+  pending,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -35,7 +41,6 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
   })
-
 
   return (
     <div className={cn(className, 'rounded-md border')}>
@@ -101,7 +106,13 @@ export function DataTable<TData, TValue>({
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
+                {pending ? (
+                  <div className="py-24">
+                    <l-quantum size="45" speed="4.75" color="#56e63f"/>
+                  </div>
+                ) : (
+                  'No results.'
+                )}
               </TableCell>
             </TableRow>
           )}
