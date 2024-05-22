@@ -32,7 +32,7 @@ export default function ProgressTracker({
   }, [value])
 
   return (
-    <Card className={cn(className, 'rounded-md')}>
+    <Card className={cn(className, 'rounded-md shadow-none')}>
       <CardHeader className="pb-2">
         <CardDescription>{title}</CardDescription>
         <CardTitle className="text-4xl">{value.toFixed(1)}%</CardTitle>

@@ -27,34 +27,34 @@ async function main() {
 
   //create reflection and link to user
 
-  for(let i = 0; i < 100; i++) {
-  await prisma.reflection.create({
-    data: {
-      title: faker.lorem.sentence(),
-      tags: faker.helpers.arrayElements(
-        ['work', 'life', 'career', 'personal', 'development'],
-        Math.floor(Math.random() * 3 + 1),
-      ),
-      content: [faker.lorem.paragraph()],
-      skills: faker.helpers.arrayElements(
-        Object.values(Skills),
-        Math.floor(Math.random() * 3 + 1),
-      ),
-      reflectionType: faker.helpers.arrayElement([ReflectionModelType.STARR]),
-      createdAt: faker.date.recent({ days: 20 }),
-      actionPoints: {
-        create: generateActionPoints('clvxn68p00000y9zsozwoitjl'),
-      },
-      
-      author: {
-        connect: {
-          id: 'clvxn68p00000y9zsozwoitjl',
+  for (let i = 0; i < 100; i++) {
+    await prisma.reflection.create({
+      data: {
+        title: faker.lorem.sentence(),
+        tags: faker.helpers.arrayElements(
+          ['work', 'life', 'career', 'personal', 'development'],
+          Math.floor(Math.random() * 3 + 1),
+        ),
+        content: [faker.lorem.paragraphs({ min: 1, max: 6 })],
+        skills: faker.helpers.arrayElements(
+          Object.values(Skills),
+          Math.floor(Math.random() * 3 + 1),
+        ),
+        reflectionType: faker.helpers.arrayElement([ReflectionModelType.STARR]),
+        createdAt: faker.date.recent({ days: 20 }),
+        actionPoints: {
+          create: generateActionPoints('clvxn68p00000y9zsozwoitjl'),
+        },
+
+        author: {
+          connect: {
+            id: 'clvxn68p00000y9zsozwoitjl',
+          },
         },
       },
-    },
-  })
-  console.log(`Reflection ${i} created`)
-}
+    })
+    console.log(`Reflection ${i} created`)
+  }
 }
 
 main()

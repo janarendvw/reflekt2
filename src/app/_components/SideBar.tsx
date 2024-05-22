@@ -11,11 +11,6 @@ type Props = {}
 
 const links = [
   {
-    name: 'Dashboard',
-    href: '/dashboard',
-    icon: <Home size={20} />,
-  },
-  {
     name: 'Reflections',
     href: '/reflections',
     icon: <FlipHorizontal2 size={20} />,

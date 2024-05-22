@@ -35,13 +35,7 @@ export const columns: ColumnDef<Reflection>[] = [
         {new Date(row.original.createdAt).toLocaleDateString()}
       </span>
     ),
-    size: 10
-  },
-  {
-    header: 'Type',
-    accessorKey: 'reflectionType',
-    cell: ({ row }) => row.original.reflectionType,
-    size: 10
+    maxSize: 1,
   },
   {
     header: 'Title',
@@ -54,8 +48,6 @@ export const columns: ColumnDef<Reflection>[] = [
         {row.original.title}
       </Link>
     ),
-    size: 60,
-    maxSize: 100,
   },
   {
     header: 'Tags',
@@ -64,7 +56,7 @@ export const columns: ColumnDef<Reflection>[] = [
       <div className="flex gap-2">
         {row.original.tags.map((tag) => (
           <Badge key={tag} variant="outline" className="text-muted-foreground">
-            {tag}
+            #{tag}
           </Badge>
         ))}
       </div>
@@ -80,8 +72,8 @@ export const columns: ColumnDef<Reflection>[] = [
           {actionPoints && actionPoints.length > 0 ? (
             <HoverCard openDelay={1} closeDelay={0}>
               <HoverCardTrigger>
-                <Badge className="flex w-fit items-center gap-2 font-mono hover:animate-pulse">
-                  <Zap size={14} /> {actionPoints.length}
+                <Badge className="flex w-max items-center gap-2 font-mono hover:animate-pulse">
+                  <Zap size={14} /> {actionPoints.length} points 
                 </Badge>
               </HoverCardTrigger>
               <HoverCardContent className="w-80">

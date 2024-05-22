@@ -34,7 +34,7 @@ async function Layout({children}: MainLayoutProps) {
         defaultSize={85}
         className="relative"
       >
-        <div className="flex w-full items-center border-b border-secondary bg-secondary/50 shadow px-4 py-2">
+        <div className="flex w-full items-center border-b border-secondary bg-secondary/50 px-4 py-2">
           <NavbarBreadcrumb />
         </div>
         <main
