@@ -2,7 +2,6 @@
 import React, { Suspense } from 'react'
 import { DataTable } from '../../_components/data-table'
 import { columns } from './columns'
-import { Badge } from '@/components/ui/badge'
 import { getReflections } from '@/app/server/actions/reflection'
 import { Reflection } from '@prisma/client'
 import { Button } from '@/components/ui/button'

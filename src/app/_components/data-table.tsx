@@ -18,9 +18,9 @@ import {
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
-import { quantum } from 'ldrs'
+import 'ldrs/quantum'
+import type {} from 'ldrs'
 
-quantum.register()
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
