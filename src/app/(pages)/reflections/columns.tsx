@@ -22,6 +22,7 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import React from 'react'
 import { EllipsisVertical, Zap } from 'lucide-react'
+import { Progress } from '@/components/ui/progress'
 
 export const columns: ColumnDef<Reflection>[] = [
   {
@@ -47,19 +48,6 @@ export const columns: ColumnDef<Reflection>[] = [
       >
         {row.original.title}
       </Link>
-    ),
-  },
-  {
-    header: 'Tags',
-    accessorKey: 'tags',
-    cell: ({ row }) => (
-      <div className="flex gap-2">
-        {row.original.tags.map((tag) => (
-          <Badge key={tag} variant="outline" className="text-muted-foreground">
-            #{tag}
-          </Badge>
-        ))}
-      </div>
     ),
   },
   {

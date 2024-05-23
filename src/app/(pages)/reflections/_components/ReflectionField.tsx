@@ -2,7 +2,7 @@
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 type Props = {
   type: string
@@ -26,6 +26,13 @@ function ReflectionField({
     setContent(newContent)
   }
 
+  const firstInputRef = React.useRef<HTMLTextAreaElement>(null)
+  useEffect(() => {
+    if (index === 0) {
+      firstInputRef.current?.focus()
+    }
+  }, [index])
+
   return (
     <motion.div
       initial={{ x: '-30%', opacity: 0 }}
@@ -36,6 +43,7 @@ function ReflectionField({
         {label}
       </Label>
       <Textarea
+        ref={index === 0 ? firstInputRef : undefined}
         id={`id-for-${label}`}
         placeholder={placeholder}
         value={content[index]}

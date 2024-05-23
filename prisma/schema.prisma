@@ -107,4 +107,5 @@ model ActionPoint {
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
   resolved     Boolean
+  resolution   String?
 }

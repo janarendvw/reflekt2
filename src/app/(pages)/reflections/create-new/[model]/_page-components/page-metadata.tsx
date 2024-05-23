@@ -15,7 +15,7 @@ function PageMetadata({ title, setTitle, tags, setTags }: Props) {
 
   const addTag = () => {
     if (tagInput.length === 0) return
-    setTags([...tags, tagInput])
+    setTags([...tags, tagInput.toLowerCase()])
     setTagInput('')
   }
 
@@ -26,7 +26,7 @@ function PageMetadata({ title, setTitle, tags, setTags }: Props) {
   }
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.code === 'Space' || e.code === 'Enter') {
+    if (e.code === 'Space' || e.code === 'Enter' || e.code === 'Tab') {
       addTag()
     }
     if (e.code === 'Backspace') {

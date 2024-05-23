@@ -23,6 +23,9 @@ const reflectionModelStructure = {
   }
 
 function PageReflection({content, setContent, model}: Props) {
+
+  const firstInputRef = React.useRef<HTMLInputElement>(null)
+
   return (
     <div className="flex flex-col gap-2">
          <h5 className="mb-2 mt-8 flex items-center gap-2 text-lg font-bold">

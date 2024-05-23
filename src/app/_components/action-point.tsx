@@ -53,7 +53,7 @@ function ActionPoint({
       <div className="mt-1 py-4 pl-4">
         <Zap className={resolved ? 'fill-foreground' : ''} size={16} />
       </div>
-      <div className="flex flex-col gap-1 py-4 pr-4">
+      <div className="flex flex-col gap-1 py-4 pr-4 flex-1">
         <h4 className="col-start-2 text-sm font-semibold">
           {actionPoint.title}
         </h4>
