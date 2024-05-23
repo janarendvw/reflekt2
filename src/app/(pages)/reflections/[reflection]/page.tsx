@@ -3,19 +3,15 @@ import React from 'react'
 import { ReflectionContent } from './_components/ReflectionContent'
 import { Separator } from '@/components/ui/separator'
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from '@/components/ui/accordion'
 import { Zap } from 'lucide-react'
 import ActionPoint from '@/app/_components/action-point'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertTitle } from '@/components/ui/alert'
+import { auth } from '@/auth'
 
 async function page({ params }: { params: { reflection: string } }) {
+  const session = await auth()
+
   const reflection = await prisma.reflection
     .findUnique({
       where: {
@@ -26,7 +22,10 @@ async function page({ params }: { params: { reflection: string } }) {
       },
     })
     .then((res) => {
-      return res ?? undefined
+      if (res?.authorId === session?.user?.id) {
+        return res ?? undefined
+      }
+      return undefined
     })
 
   const resolvedActionPoints = reflection?.actionPoints.filter(
@@ -52,35 +51,30 @@ async function page({ params }: { params: { reflection: string } }) {
         ))}
       </div>
       <Separator className="mt-8" />
-      <h2 className="mt-14 font-semibold mb-1">Unresolved action points</h2>
+      <h2 className="mb-1 mt-14 font-semibold">Unresolved action points</h2>
       <div className="flex flex-col gap-2">
         {unresolvedActionPoints?.map((ap, index) => (
           <ActionPoint key={ap.title} actionPoint={ap} index={index} />
         ))}
       </div>
       {unresolvedActionPoints?.length === 0 && (
-        <Alert className='border-dashed'>
-          <Zap className='stroke-muted-foreground' size={16}/>
+        <Alert className="border-dashed">
+          <Zap className="stroke-muted-foreground" size={16} />
           <AlertTitle>No unresolved action points</AlertTitle>
           <p className="text-sm text-muted-foreground">
             You have no unresolved action points. Keep up the good work!
           </p>
         </Alert>
       )}
-      <h2 className="mt-14 font-semibold mb-1">Resolved action points</h2>
+      <h2 className="mb-1 mt-14 font-semibold">Resolved action points</h2>
       <div className="flex flex-col gap-2">
         {resolvedActionPoints?.map((ap, index) => (
-          <ActionPoint
-            resolved
-            key={ap.title}
-            actionPoint={ap}
-            index={index}
-          />
+          <ActionPoint resolved key={ap.title} actionPoint={ap} index={index} />
         ))}
       </div>
       {resolvedActionPoints?.length === 0 && (
-        <Alert className='border-dashed'>
-          <Zap className='stroke-muted-foreground' size={16}/>
+        <Alert className="border-dashed">
+          <Zap className="stroke-muted-foreground" size={16} />
           <AlertTitle>No resolved action points</AlertTitle>
           <p className="text-sm text-muted-foreground">
             You have no resolved action points. Keep up the good work!
