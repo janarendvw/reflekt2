@@ -17,10 +17,7 @@ import {
 } from '@/components/ui/table'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
-
-import 'ldrs/quantum'
-import type {} from 'ldrs'
-
+import Loader from './loader/loader'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -107,8 +104,8 @@ export function DataTable<TData, TValue>({
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
                 {pending ? (
-                  <div className="py-24">
-                    <l-quantum size="45" speed="4.75" color="#56e63f"/>
+                  <div className="py-24 flex items-center justify-center w-full">
+                    <Loader  />
                   </div>
                 ) : (
                   'No results.'

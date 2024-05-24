@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Reflection } from '@prisma/client'
+import { ActionPoint, Reflection } from '@prisma/client'
 import {
   HoverCard,
   HoverCardTrigger,
@@ -51,6 +51,28 @@ export const columns: ColumnDef<Reflection>[] = [
     ),
   },
   {
+    header: 'Resolved',
+    accessorKey: 'progress',
+    cell: ({ row }) => {
+      const actionPoints: [] = row.getValue('actionPoints')
+      const resolvedActionPoints = actionPoints.filter(
+        (actionPoint: ActionPoint) => actionPoint.resolved,
+      )
+
+      return (
+        <div className='flex items-center gap-2'>
+        <Progress
+          value={(resolvedActionPoints.length / actionPoints.length) * 100}
+          className='min-w-[100px]'
+        />
+        <span className="text-muted-foreground text-xs">
+          {resolvedActionPoints.length}/{actionPoints.length}
+        </span>
+        </div>
+      )
+    },
+  },
+  {
     header: 'actionpoints',
     accessorKey: 'actionPoints',
     cell: ({ row }) => {
@@ -61,7 +83,7 @@ export const columns: ColumnDef<Reflection>[] = [
             <HoverCard openDelay={1} closeDelay={0}>
               <HoverCardTrigger>
                 <Badge className="flex w-max items-center gap-2 font-mono hover:animate-pulse">
-                  <Zap size={14} /> {actionPoints.length} points 
+                  <Zap size={14} /> {actionPoints.length} points
                 </Badge>
               </HoverCardTrigger>
               <HoverCardContent className="w-80">

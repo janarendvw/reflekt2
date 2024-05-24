@@ -5,12 +5,12 @@ import { Button } from '@/components/ui/button'
 import { createReflection } from '@/app/server/actions/reflection'
 import { useSession } from 'next-auth/react'
 
-import AddActionPoint from './_page-components/_components/AddActionPoint'
 import PageMetadata from './_page-components/page-metadata'
 import PageReflection from './_page-components/page-reflection'
 import PageActionPoints from './_page-components/page-actionpoints'
 import { Sparkle } from 'lucide-react'
 import { motion } from 'framer-motion'
+import Loader from '@/app/_components/loader/loader'
 
 function Page({ params }: { params: { model: ReflectionModelType } }) {
   const [title, setTitle] = useState<string>('')
@@ -90,7 +90,17 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
         ) : (
           <span id="placeholder"></span>
         )}
-        <Button variant={!actionPoints.length && page === 2 ? 'secondary' : 'default'} className="w-1/3" onClick={() => page < 2 ? setPage(page + 1) : handleSubmit()}>
+        <Button
+          disabled={pending}
+          variant={!actionPoints.length && page === 2 ? 'secondary' : 'default'}
+          className="flex w-1/3 items-center gap-2"
+          onClick={() => (page < 2 ? setPage(page + 1) : handleSubmit())}
+        >
+          {pending && (
+            <div>
+              <Loader />
+            </div>
+          )}{' '}
           {page < 2 ? 'Next' : 'Submit'}
         </Button>
       </motion.div>
