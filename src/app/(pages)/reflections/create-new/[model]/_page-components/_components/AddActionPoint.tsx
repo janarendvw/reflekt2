@@ -1,4 +1,4 @@
-import ActionPoint from '@/app/_components/action-point'
+import DraftActionPointCard from '@/app/_components/draft-action-point-card'
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import {
@@ -33,10 +33,9 @@ function AddActionPoint({
 
   useEffect(() => {
     if (addButtonRef.current) {
-      addButtonRef.current.focus({focusVisible: true} as FocusOptions)
+      addButtonRef.current.focus({ focusVisible: true } as FocusOptions)
     }
-  }
-  , [])
+  }, [])
 
   const addActionPoint = () => {
     setActionPoints([
@@ -47,13 +46,22 @@ function AddActionPoint({
     setActionPointContent('')
   }
 
+  const removeActionPoint = (index: number) => {
+    setActionPoints(actionPoints.filter((_, i) => i !== index))
+  }
+
   return (
     <>
       <AnimatePresence mode="popLayout">
         {actionPoints.length ? (
           actionPoints.map((actionPoint, index) => {
             return (
-             <ActionPoint key={actionPoint.title} actionPoint={actionPoint} index={index} />
+              <DraftActionPointCard
+                key={actionPoint.title}
+                actionPoint={actionPoint}
+                removeActionPoint={() => removeActionPoint(index)}
+                index={index}
+              />
             )
           })
         ) : (
@@ -63,7 +71,7 @@ function AddActionPoint({
         )}
       </AnimatePresence>
 
-      <Dialog>  
+      <Dialog>
         <DialogTrigger asChild>
           <Button
             ref={addButtonRef}

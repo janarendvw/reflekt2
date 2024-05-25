@@ -4,7 +4,7 @@ import { ReflectionContent } from './_components/ReflectionContent'
 import { Separator } from '@/components/ui/separator'
 
 import { Zap } from 'lucide-react'
-import ActionPoint from '@/app/_components/action-point'
+import ActionPointCard from '@/app/_components/action-point'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertTitle } from '@/components/ui/alert'
 import { auth } from '@/auth'
@@ -42,10 +42,10 @@ async function page({ params }: { params: { reflection: string } }) {
         {reflection?.createdAt.toLocaleDateString()} -{' '}
         {reflection?.reflectionType} model
       </p>
-      <div className="h-[60vh] p-3 border rounded-md">
+      <div className="min-h-[30vh]">
         <ReflectionContent content={reflection?.content ?? []} />
       </div>
-      <div className="mt-4 flex gap-4">
+      <div className="mt-4 flex items-center gap-4 text-sm text-muted-foreground">
         Tags:{' '}
         {reflection?.tags.map((tag) => (
           <Badge key={tag} variant="outline" className="text-muted-foreground">
@@ -54,11 +54,11 @@ async function page({ params }: { params: { reflection: string } }) {
         ))}
       </div>
 
-      <Separator className="mt-8" />
-      <h2 className="mb-1 mt-14 font-semibold">Unresolved action points</h2>
+      <Separator className="my-8" />
+      <h2 className="mb-2 font-semibold">Unresolved action points</h2>
       <div className="flex flex-col gap-2">
         {unresolvedActionPoints?.map((ap, index) => (
-          <ActionPoint key={ap.title} actionPoint={ap} index={index} />
+          <ActionPointCard key={ap.title} actionPoint={ap} index={index} />
         ))}
       </div>
       {unresolvedActionPoints?.length === 0 && (
@@ -70,10 +70,10 @@ async function page({ params }: { params: { reflection: string } }) {
           </p>
         </Alert>
       )}
-      <h2 className="mb-1 mt-14 font-semibold">Resolved action points</h2>
+      <h2 className="mb-2 mt-14 font-semibold">Resolved action points</h2>
       <div className="flex flex-col gap-2">
         {resolvedActionPoints?.map((ap, index) => (
-          <ActionPoint
+          <ActionPointCard
             resolved
             key={ap.title}
             actionPoint={ap}

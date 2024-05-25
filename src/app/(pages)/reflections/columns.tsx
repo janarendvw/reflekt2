@@ -138,9 +138,7 @@ export const columns: ColumnDef<Reflection>[] = [
             <button
               className={'flex w-full text-red-400'}
               onClick={() => {
-                deleteReflectionById(row.original.id).then(() =>
-                  window.location.reload(),
-                )
+                deleteReflectionById(row.original.id)
               }}
             >
               Delete

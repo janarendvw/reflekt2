@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from '@/lib/client'
+import { revalidatePath } from 'next/cache'
 
 export async function getActionPointById(id: number) {
   const res = await prisma.actionPoint.findUnique({
@@ -50,5 +51,5 @@ export async function unresolveActionPointById(id: number) {
       resolution: null,
     },
   })
-  return res
+  return revalidatePath('/action-points')
 }
