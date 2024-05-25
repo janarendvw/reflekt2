@@ -6,36 +6,44 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
-import { Zap, Trash2, EllipsisVertical, Edit } from 'lucide-react'
+import {
+  Zap,
+  Trash2,
+  EllipsisVertical,
+  Edit,
+  Wrench,
+  CheckCircle,
+} from 'lucide-react'
 import React, { ComponentPropsWithoutRef } from 'react'
+import { deleteActionPointById } from '../server/actions/action-point'
 
 type Props = {
   actionPoint: { title: string; content: string }
   index: number
-  deleteActionPoint?: (index: number) => void
   className?: string
   resolved?: boolean
   inherited?: ComponentPropsWithoutRef<'div'>
+  resolution?: string | null
 }
 
 function ActionPoint({
   actionPoint,
   index,
-  deleteActionPoint,
   className,
   resolved,
+  resolution,
   ...inherited
 }: Props) {
+
+
+  const deleteActionPoint = async () => {
+    await deleteActionPointById(index)
+  }
   return (
     <motion.div
       {...inherited}
@@ -44,24 +52,22 @@ function ActionPoint({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={cn(className, 'flex gap-2 rounded-md border', {
-        'border-foreground': resolved,
-        'border-success': !resolved,
-      
-      })}
+      className={cn(
+        className,
+        'grid grid-cols-[auto_1fr_auto] gap-2 rounded-md border px-3 py-4',
+        {
+          ' border-green-600/50 text-green-600': resolved,
+        },
+      )}
     >
-      <div className="mt-1 py-4 pl-4">
-        <Zap className={resolved ? 'fill-foreground' : ''} size={16} />
+      <div className="col-start-1 p-1">
+        {resolved ? <CheckCircle size={16} /> : <Zap size={16} />}
       </div>
-      <div className="flex flex-col gap-1 py-4 pr-4 flex-1">
-        <h4 className="col-start-2 text-sm font-semibold">
-          {actionPoint.title}
-        </h4>
-        <p className="col-start-2 text-sm text-muted-foreground">
-          {actionPoint.content}
-        </p>
+      <div className="col-start-2">
+        <h5 className="font-bold">{actionPoint.title}</h5>
+        <p className="text-muted-foreground">{actionPoint.content}</p>
       </div>
-      <div className="flex h-min items-center gap-2 p-2">
+      <div className="col-start-3">
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <button>
@@ -82,6 +88,18 @@ function ActionPoint({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      {resolution && (
+        <>
+          <div className="col-start-1 row-start-2 p-1">
+            <Wrench size={16} />
+          </div>
+          <div className="col-start-2 row-start-2">
+            <h5 className="font-bold">Resolution</h5>
+
+            <p className="text-muted-foreground">{resolution}</p>
+          </div>
+        </>
+      )}
     </motion.div>
   )
 }

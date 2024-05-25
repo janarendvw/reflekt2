@@ -39,7 +39,7 @@ function BigButton({ model, index }: Props) {
         transition={{ delay: 0.05 * index }}
         whileTap={{ scale: 1 }}
       >
-        <Card className="rounded-md">
+        <Card className="rounded-md shadow-none">
           <CardHeader>
             <CardTitle className="text-xl font-semibold capitalize">
               {model}

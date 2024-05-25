@@ -27,13 +27,14 @@ export async function getTotalActionPointCount() {
 
 //* Action point status mutations
 
-export async function resolveActionPointById(id: number) {
+export async function resolveActionPointById(id: number, resolution: string) {
   const res = await prisma.actionPoint.update({
     where: {
       id,
     },
     data: {
       resolved: true,
+      resolution,
     },
   })
   return res
@@ -46,6 +47,7 @@ export async function unresolveActionPointById(id: number) {
     },
     data: {
       resolved: false,
+      resolution: null,
     },
   })
   return res

@@ -80,6 +80,7 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
       >
         {page !== 0 ? (
           <Button
+            tabIndex={1}
             className="w-1/6"
             onClick={() => setPage(page - 1)}
             disabled={page === 0}
@@ -91,6 +92,7 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
           <span id="placeholder"></span>
         )}
         <Button
+        tabIndex={0}
           disabled={pending}
           variant={!actionPoints.length && page === 2 ? 'secondary' : 'default'}
           className="flex w-1/3 items-center gap-2"

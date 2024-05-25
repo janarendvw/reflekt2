@@ -16,7 +16,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { AnimatePresence, motion } from 'framer-motion'
 import { PlusCircle, Info, Zap, Trash2 } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 type AddActionPointProps = {
   actionPoints: { title: string; content: string }[]
@@ -29,6 +29,14 @@ function AddActionPoint({
 }: AddActionPointProps) {
   const [acionPointTitle, setActionPointTitle] = useState<string>('')
   const [actionPointContent, setActionPointContent] = useState<string>('')
+  const addButtonRef = React.useRef<HTMLButtonElement>(null)
+
+  useEffect(() => {
+    if (addButtonRef.current) {
+      addButtonRef.current.focus({focusVisible: true} as FocusOptions)
+    }
+  }
+  , [])
 
   const addActionPoint = () => {
     setActionPoints([
@@ -60,9 +68,10 @@ function AddActionPoint({
         )}
       </AnimatePresence>
 
-      <Dialog>
+      <Dialog>  
         <DialogTrigger asChild>
           <Button
+            ref={addButtonRef}
             variant={actionPoints.length < 1 ? 'default' : 'outline'}
             className="flex w-fit items-center gap-2"
           >

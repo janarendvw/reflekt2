@@ -42,14 +42,18 @@ async function page({ params }: { params: { reflection: string } }) {
         {reflection?.createdAt.toLocaleDateString()} -{' '}
         {reflection?.reflectionType} model
       </p>
-      <ReflectionContent content={reflection?.content ?? []} />
+      <div className="h-[60vh] p-3 border rounded-md">
+        <ReflectionContent content={reflection?.content ?? []} />
+      </div>
       <div className="mt-4 flex gap-4">
+        Tags:{' '}
         {reflection?.tags.map((tag) => (
           <Badge key={tag} variant="outline" className="text-muted-foreground">
             #{tag}
           </Badge>
         ))}
       </div>
+
       <Separator className="mt-8" />
       <h2 className="mb-1 mt-14 font-semibold">Unresolved action points</h2>
       <div className="flex flex-col gap-2">
@@ -69,7 +73,13 @@ async function page({ params }: { params: { reflection: string } }) {
       <h2 className="mb-1 mt-14 font-semibold">Resolved action points</h2>
       <div className="flex flex-col gap-2">
         {resolvedActionPoints?.map((ap, index) => (
-          <ActionPoint resolved key={ap.title} actionPoint={ap} index={index} />
+          <ActionPoint
+            resolved
+            key={ap.title}
+            actionPoint={ap}
+            index={index}
+            resolution={ap.resolution}
+          />
         ))}
       </div>
       {resolvedActionPoints?.length === 0 && (

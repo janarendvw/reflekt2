@@ -73,7 +73,7 @@ export const columns: ColumnDef<Reflection>[] = [
     },
   },
   {
-    header: 'actionpoints',
+    header: 'Action points',
     accessorKey: 'actionPoints',
     cell: ({ row }) => {
       const actionPoints: [] = row.getValue('actionPoints')
@@ -82,7 +82,7 @@ export const columns: ColumnDef<Reflection>[] = [
           {actionPoints && actionPoints.length > 0 ? (
             <HoverCard openDelay={1} closeDelay={0}>
               <HoverCardTrigger>
-                <Badge className="flex w-max items-center gap-2 font-mono hover:animate-pulse">
+                <Badge variant={'outline'} className="flex w-max items-center gap-2 font-mono hover:animate-pulse">
                   <Zap size={14} /> {actionPoints.length} points
                 </Badge>
               </HoverCardTrigger>

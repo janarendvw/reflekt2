@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import AddActionPoint from './_components/AddActionPoint'
 import { Zap } from 'lucide-react'

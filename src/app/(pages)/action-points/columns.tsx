@@ -24,6 +24,11 @@ import {
   Hourglass,
   Trash2,
 } from 'lucide-react'
+import { Dialog } from '@/components/ui/dialog'
+import ResolveActionPointForm from '@/app/_components/resolve-action-point-form'
+import { DialogTrigger } from '@radix-ui/react-dialog'
+import { useRouter } from 'next/navigation'
+
 
 export const columns: ColumnDef<ActionPoint>[] = [
   {
@@ -88,38 +93,50 @@ export const columns: ColumnDef<ActionPoint>[] = [
     header: '',
     accessorKey: 'id',
     cell: ({ row }) => (
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon" className="font-bold">
-            <EllipsisVertical size={14} />{' '}
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent>
-          <DropdownMenuItem>
-            <button
-              className={'flex w-full items-center gap-1 text-red-400'}
-              onClick={() => {
-                deleteActionPointById(row.original.id)
-              }}
-            >
-              <Trash2 size={14} /> Delete
-            </button>
-          </DropdownMenuItem>
-          <DropdownMenuItem>
-            <button
-              className={'flex w-full items-center gap-1'}
-              onClick={() => {
-                row.original.resolved
-                  ? unresolveActionPointById(row.original.id)
-                  : resolveActionPointById(row.original.id)
-              }}
-            >
-              <ArrowLeftRight size={14} />{' '}
-              {row.original.resolved ? 'Unresolve' : 'Resolve'}
-            </button>
-          </DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <Dialog>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="font-bold">
+              <EllipsisVertical size={14} />{' '}
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem>
+              <button
+                className={'flex w-full items-center gap-1 text-red-400'}
+                onClick={() => {
+                  deleteActionPointById(row.original.id)
+                }}
+              >
+                <Trash2 size={14} /> Delete
+              </button>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              {row.original.resolved ? (
+                <button
+                  className={'flex w-full items-center gap-1'}
+                  onClick={() => {
+                    row.original.resolved &&
+                       unresolveActionPointById(row.original.id)
+                  }}
+                >
+                  Unresolve
+                </button>
+              ) : (
+                <DialogTrigger
+                  asChild
+                  className={'flex w-full items-center gap-1'}
+                >
+                  <button>
+                    <ArrowLeftRight size={14} /> Resolve
+                  </button>
+                </DialogTrigger>
+              )}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <ResolveActionPointForm actionPoint={row.original} />
+      </Dialog>
     ),
   },
 ]
