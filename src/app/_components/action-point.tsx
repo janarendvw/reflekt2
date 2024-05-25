@@ -18,10 +18,8 @@ import {
   Edit,
   Wrench,
   CheckCircle,
-  ArrowDown,
 } from 'lucide-react'
 import React, { ComponentPropsWithoutRef } from 'react'
-import { deleteActionPointById } from '../server/actions/action-point'
 import { Separator } from '@/components/ui/separator'
 
 type Props = {
@@ -85,9 +83,10 @@ function ActionPoint({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <Separator className="col-span-3 row-start-2 my-2" />
+
       {resolution && (
         <>
+          <Separator className="col-span-3 row-start-2 my-2" />
           <div className="col-start-1 row-start-3 p-1 text-green-600">
             <Wrench size={16} />
           </div>

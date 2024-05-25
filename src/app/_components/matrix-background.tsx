@@ -7,7 +7,7 @@ type Props = {
   characters?: boolean
 };
 
-function MatrixBackgound({size = 12, characters = true, smooth = true}:Props) {
+function MatrixBackgound({size = 16, characters = true, smooth = true}:Props) {
   let [windowWidth, windowHeight] = [useRef(0), useRef(0)];
   window && (windowWidth.current = window.innerWidth);
   window && (windowHeight.current = window.innerHeight);
