@@ -47,18 +47,13 @@ function AddActionPoint({
     setActionPointContent('')
   }
 
-  const deleteActionPoint = (index: number) => {
-    const newActionPoints = actionPoints.filter((_, i) => i !== index)
-    setActionPoints(newActionPoints)
-  }
-
   return (
     <>
       <AnimatePresence mode="popLayout">
         {actionPoints.length ? (
           actionPoints.map((actionPoint, index) => {
             return (
-             <ActionPoint key={actionPoint.title} actionPoint={actionPoint} index={index} deleteActionPoint={deleteActionPoint} />
+             <ActionPoint key={actionPoint.title} actionPoint={actionPoint} index={index} />
             )
           })
         ) : (

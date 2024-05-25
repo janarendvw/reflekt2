@@ -41,9 +41,6 @@ function ActionPoint({
 }: Props) {
 
 
-  const deleteActionPoint = async () => {
-    await deleteActionPointById(index)
-  }
   return (
     <motion.div
       {...inherited}
