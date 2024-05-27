@@ -4,10 +4,10 @@ import { ReflectionContent } from './_components/ReflectionContent'
 import { Separator } from '@/components/ui/separator'
 
 import { Zap } from 'lucide-react'
-import ActionPointCard from '@/app/_components/action-point'
 import { Badge } from '@/components/ui/badge'
 import { Alert, AlertTitle } from '@/components/ui/alert'
 import { auth } from '@/auth'
+import ActionPointCard from '@/app/_components/action-point-card'
 
 async function page({ params }: { params: { reflection: string } }) {
   const session = await auth()
