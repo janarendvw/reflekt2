@@ -9,18 +9,13 @@ import { CheckCircle } from 'lucide-react'
 
 async function Page({ params }: { params: { actionPoint: string } }) {
   const actionPoint = await getActionPointById(Number(params.actionPoint))
+
   return (
     <div className="mx-auto w-full max-w-screen-md">
-      <h1 className="text-2xl font-semibold capitalize">
-        {actionPoint?.title}
-      </h1>
+      <h1 className="text-2xl font-semibold capitalize">{actionPoint?.title}</h1>
       <p className="mb-4 font-mono text-sm text-gray-500">
         {actionPoint?.createdAt.toLocaleDateString()} -{' '}
-        {actionPoint?.resolved ? (
-          <span className="text-primary">Resolved</span>
-        ) : (
-          'Open'
-        )}
+        {actionPoint?.resolved ? <span className="text-primary">Resolved</span> : 'Open'}
       </p>
       <p className="text-lg">{actionPoint?.content}</p>
       {actionPoint?.resolution ? (

@@ -11,16 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
-import {
-  Zap,
-  Trash2,
-  EllipsisVertical,
-  Edit,
-  Wrench,
-  CheckCircle,
-  ArrowLeftRight,
-  ArrowRightLeft,
-} from 'lucide-react'
+import { Zap, Trash2, EllipsisVertical, Edit, Wrench, CheckCircle, ArrowLeftRight, ArrowRightLeft } from 'lucide-react'
 import React, { ComponentPropsWithoutRef } from 'react'
 import { Separator } from '@/components/ui/separator'
 import { Dialog } from '@/components/ui/dialog'
@@ -39,14 +30,7 @@ type Props = {
   resolution?: string | null
 }
 
-function ActionPointCard({
-  actionPoint,
-  index,
-  className,
-  resolved,
-  resolution,
-  ...inherited
-}: Props) {
+function ActionPointCard({ actionPoint, index, className, resolved, resolution, ...inherited }: Props) {
   const router = useRouter()
 
   const handleUnresolve = async (id: number) => {
@@ -63,17 +47,11 @@ function ActionPointCard({
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={cn(
-        className,
-        'grid grid-cols-[auto_1fr_auto] gap-2 rounded-md border px-3 py-4',
-        {
-          ' border-green-600/50 bg-green-600/10': resolved,
-        },
-      )}
+      className={cn(className, 'grid grid-cols-[auto_1fr_auto] gap-2 rounded-md border px-3 py-4', {
+        ' border-green-600/50 bg-green-600/10': resolved,
+      })}
     >
-      <div className="col-start-1 flex flex-col p-1">
-        {resolved ? <Zap size={16} /> : <Zap size={16} />}
-      </div>
+      <div className="col-start-1 flex flex-col p-1">{resolved ? <Zap size={16} /> : <Zap size={16} />}</div>
       <div className="col-start-2">
         <h5 className="font-bold">{actionPoint.title}</h5>
         <p className="text-muted-foreground">{actionPoint.content}</p>
@@ -103,9 +81,7 @@ function ActionPointCard({
                     </DialogTrigger>
                   </DropdownMenuItem>
                 ) : (
-                  <DropdownMenuItem
-                    onClick={() => handleUnresolve(actionPoint.id)}
-                  >
+                  <DropdownMenuItem onClick={() => handleUnresolve(actionPoint.id)}>
                     <ArrowRightLeft size={14} className="mr-1" /> Unresolve
                   </DropdownMenuItem>
                 )}

@@ -36,10 +36,7 @@ async function main() {
           Math.floor(Math.random() * 3 + 1),
         ),
         content: [faker.lorem.paragraphs({ min: 1, max: 6 })],
-        skills: faker.helpers.arrayElements(
-          Object.values(Skills),
-          Math.floor(Math.random() * 3 + 1),
-        ),
+        skills: faker.helpers.arrayElements(Object.values(Skills), Math.floor(Math.random() * 3 + 1)),
         reflectionType: faker.helpers.arrayElement([ReflectionModelType.STARR]),
         createdAt: faker.date.recent({ days: 20 }),
         actionPoints: {
@@ -58,7 +55,7 @@ async function main() {
 }
 
 main()
-  .catch(async (e) => {
+  .catch(async e => {
     console.error(e)
     await prisma.$disconnect()
     process.exit(1)

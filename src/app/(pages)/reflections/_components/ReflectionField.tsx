@@ -13,13 +13,7 @@ type Props = {
   index: number
 }
 
-function ReflectionField({
-  label,
-  placeholder,
-  content,
-  setContent,
-  index,
-}: Props) {
+function ReflectionField({ label, placeholder, content, setContent, index }: Props) {
   const handleContentChange = (index: number, value: string) => {
     const newContent = [...content]
     newContent[index] = value
@@ -34,11 +28,7 @@ function ReflectionField({
   }, [index])
 
   return (
-    <motion.div
-      initial={{ x: '-30%', opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ delay: 0.05 * index }}
-    >
+    <motion.div initial={{ x: '-30%', opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.05 * index }}>
       <Label className="capitalize" htmlFor={`id-for-${label}`}>
         {label}
       </Label>
@@ -47,7 +37,7 @@ function ReflectionField({
         id={`id-for-${label}`}
         placeholder={placeholder}
         value={content[index]}
-        onChange={(e) => handleContentChange(index, e.target.value)}
+        onChange={e => handleContentChange(index, e.target.value)}
         required
       />
     </motion.div>

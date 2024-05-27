@@ -1,12 +1,5 @@
 'use client'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { cn } from '@/lib/utils'
 import { useEffect, useLayoutEffect, useState } from 'react'
@@ -40,9 +33,11 @@ export default function ProgressTracker({
       <CardContent>
         <div className="text-xs text-muted-foreground">{description}</div>
       </CardContent>
-     {showProgressBar && <CardFooter>
-        <Progress value={progress} aria-label={description} />
-      </CardFooter>}
+      {showProgressBar && (
+        <CardFooter>
+          <Progress value={progress} aria-label={description} />
+        </CardFooter>
+      )}
     </Card>
   )
 }

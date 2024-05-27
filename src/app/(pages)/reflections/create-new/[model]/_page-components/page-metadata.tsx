@@ -37,18 +37,16 @@ function PageMetadata({ title, setTitle, tags, setTags }: Props) {
   return (
     <motion.div>
       <h5 className="mb-2 flex items-center gap-2 text-lg font-bold">
-        Think of a fitting title{' '}
-        <Regex size={16} className="text-muted-foreground" />
+        Think of a fitting title <Regex size={16} className="text-muted-foreground" />
       </h5>
       <Input
         value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={e => setTitle(e.target.value)}
         placeholder={'Enter a title'}
         id="reflection-title"
       />
       <h5 className="mb-2 mt-8 flex items-center gap-2 text-lg font-bold">
-        Categorize your reflection using tags{' '}
-        <Tag size={16} className="text-muted-foreground" />
+        Categorize your reflection using tags <Tag size={16} className="text-muted-foreground" />
       </h5>
       <div className="flex items-center gap-2 rounded-md border border-border px-3 py-2 focus-within:border-primary">
         <AnimatePresence mode="popLayout">
@@ -62,12 +60,10 @@ function PageMetadata({ title, setTitle, tags, setTags }: Props) {
               key={tag}
               className="flex items-center gap-2 rounded-md bg-secondary px-2 py-1"
             >
-              <span className="text-xs font-semibold tracking-wide text-foreground">
-                {tag}
-              </span>
+              <span className="text-xs font-semibold tracking-wide text-foreground">{tag}</span>
               <button
                 className="text-xs text-muted-foreground hover:text-foreground"
-                onClick={() => setTags(tags.filter((t) => t !== tag))}
+                onClick={() => setTags(tags.filter(t => t !== tag))}
               >
                 <X size={16} />
               </button>
@@ -78,11 +74,9 @@ function PageMetadata({ title, setTitle, tags, setTags }: Props) {
           transition={{ duration: 0.15 }}
           className="w-full appearance-none bg-transparent text-sm text-foreground outline-none placeholder:text-sm placeholder:text-muted-foreground"
           value={tagInput}
-          onChange={(e) => setTagInput(e.target.value.replace(/\s/g, '') || '')}
-          onKeyDown={(e) => handleKeyDown(e)}
-          placeholder={
-            !tags.length ? 'Separate tags by pressing space' : undefined
-          }
+          onChange={e => setTagInput(e.target.value.replace(/\s/g, '') || '')}
+          onKeyDown={e => handleKeyDown(e)}
+          placeholder={!tags.length ? 'Separate tags by pressing space' : undefined}
         />
       </div>
     </motion.div>

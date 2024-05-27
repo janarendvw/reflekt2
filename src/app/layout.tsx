@@ -6,11 +6,7 @@ import { redirect } from 'next/navigation'
 import NavBar from '@/app/_components/NavBar'
 import { Separator } from '@/components/ui/separator'
 import SideBar from './_components/SideBar'
-import {
-  ResizablePanelGroup,
-  ResizablePanel,
-  ResizableHandle,
-} from '@/components/ui/resizable'
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable'
 import { auth } from '@/auth'
 import NavbarBreadcrumb from './_components/NavBarBreadcrumb'
 
@@ -31,9 +27,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <SessionProvider session={session}>
-         {children}
-        </SessionProvider>
+        <SessionProvider session={session}>{children}</SessionProvider>
       </body>
     </html>
   )

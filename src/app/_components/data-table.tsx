@@ -1,20 +1,7 @@
 'use client'
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from '@tanstack/react-table'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
+import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, useReactTable } from '@tanstack/react-table'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import Loader from './loader/loader'
@@ -26,12 +13,7 @@ interface DataTableProps<TData, TValue> {
   pending?: boolean
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-  className,
-  pending,
-}: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data, className, pending }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
@@ -43,14 +25,11 @@ export function DataTable<TData, TValue>({
     <div className={cn(className, 'rounded-md border')}>
       <Table className="h-full max-h-full overflow-hidden">
         <TableHeader>
-          {table.getHeaderGroups().map((headerGroup) => (
+          {table.getHeaderGroups().map(headerGroup => (
             <TableRow key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
+              {headerGroup.headers.map(header => {
                 return (
-                  <TableHead
-                    style={{ width: `${header.getSize()}%` }}
-                    key={header.id}
-                  >
+                  <TableHead style={{ width: `${header.getSize()}%` }} key={header.id}>
                     <motion.div
                       initial={{ y: 40, opacity: -5 }}
                       animate={{ y: 0, opacity: 1 }}
@@ -60,12 +39,7 @@ export function DataTable<TData, TValue>({
                       }}
                       layoutId={header.id}
                     >
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
+                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
                     </motion.div>
                   </TableHead>
                 )
@@ -75,11 +49,8 @@ export function DataTable<TData, TValue>({
         </TableHeader>
         <TableBody className="overflow-scroll">
           {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && 'selected'}
-              >
+            table.getRowModel().rows.map(row => (
+              <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                 {row.getVisibleCells().map((cell, index) => (
                   <TableCell key={cell.id}>
                     <motion.div
@@ -91,10 +62,7 @@ export function DataTable<TData, TValue>({
                         duration: 0.15,
                       }}
                     >
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </motion.div>
                   </TableCell>
                 ))}
@@ -104,8 +72,8 @@ export function DataTable<TData, TValue>({
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
                 {pending ? (
-                  <div className="py-24 flex items-center justify-center w-full">
-                    <Loader  />
+                  <div className="flex w-full items-center justify-center py-24">
+                    <Loader />
                   </div>
                 ) : (
                   'No results.'

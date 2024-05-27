@@ -44,9 +44,7 @@ function NavBar({}: Props) {
       <div className="flex items-center gap-4">
         <Avatar>
           <AvatarImage src={image} />
-          <AvatarFallback>
-            {session?.data?.user?.name?.[0].toUpperCase() ?? ''}
-          </AvatarFallback>
+          <AvatarFallback>{session?.data?.user?.name?.[0].toUpperCase() ?? ''}</AvatarFallback>
         </Avatar>
         <AuthButton />
       </div>

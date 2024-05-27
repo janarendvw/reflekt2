@@ -41,26 +41,16 @@ function ResolveActionPointForm({ actionPoint }: ResolveActionPointFormProps) {
         <DialogHeader>
           <DialogTitle>Resolve actionpoint</DialogTitle>
           <DialogDescription>
-            Resolve the action point by defining the actions taken and their
-            results
+            Resolve the action point by defining the actions taken and their results
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col gap-4 py-4">
           <Label htmlFor="resolution">Resolution</Label>
-          <Textarea
-            onChange={(e) => setResolution(e.target.value)}
-            value={resolution}
-            id="resolution"
-            className="h-56"
-          />
+          <Textarea onChange={e => setResolution(e.target.value)} value={resolution} id="resolution" className="h-56" />
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button
-              type="submit"
-              className="flex items-center gap-2"
-              onClick={() => handleResolve()}
-            >
+            <Button type="submit" className="flex items-center gap-2" onClick={() => handleResolve()}>
               <CheckCircle size={16} />
               Resolve
             </Button>

@@ -6,9 +6,7 @@ import { cn } from '@/lib/utils'
 
 type Props = {
   actionPoints: { title: string; content: string }[]
-  setActionPoints: React.Dispatch<
-    React.SetStateAction<{ title: string; content: string }[]>
-  >
+  setActionPoints: React.Dispatch<React.SetStateAction<{ title: string; content: string }[]>>
 }
 
 function PageActionPoints({ actionPoints, setActionPoints }: Props) {
@@ -19,17 +17,11 @@ function PageActionPoints({ actionPoints, setActionPoints }: Props) {
         <Zap size={16} className="text-muted-foreground" />
       </h5>
       <div
-        className={cn(
-          'my-8 flex flex-col gap-4 rounded-md border border-border p-4 ',
-          {
-            'items-center py-12': actionPoints.length === 0,
-          },
-        )}
+        className={cn('my-8 flex flex-col gap-4 rounded-md border border-border p-4 ', {
+          'items-center py-12': actionPoints.length === 0,
+        })}
       >
-        <AddActionPoint
-          actionPoints={actionPoints}
-          setActionPoints={setActionPoints}
-        />
+        <AddActionPoint actionPoints={actionPoints} setActionPoints={setActionPoints} />
       </div>
     </>
   )

@@ -18,7 +18,7 @@ const links = [
   {
     name: 'Action points',
     href: '/action-points',
-    icon: <Zap size={20} className=''/>,
+    icon: <Zap size={20} className="" />,
   },
 ]
 
@@ -30,17 +30,15 @@ function SideBar({}: Props) {
         href={'/reflections/create-new'}
         className="flex w-full items-center justify-start gap-2 rounded-md bg-primary px-4 py-3 text-sm font-medium tracking-wide text-primary-foreground"
       >
-        <Sparkle size={20}/> Create new
+        <Sparkle size={20} /> Create new
       </Link>
       <Separator />
-      {links.map((link) => (
+      {links.map(link => (
         <React.Fragment key={link.href}>
           <Link
             className={cn(
               'relative flex w-full justify-start rounded px-4 py-2 text-sm font-medium tracking-wide',
-              pathname.includes(link.href ?? ':::')
-                ? 'text-foreground'
-                : 'text-muted-foreground',
+              pathname.includes(link.href ?? ':::') ? 'text-foreground' : 'text-muted-foreground',
             )}
             href={link.href}
           >

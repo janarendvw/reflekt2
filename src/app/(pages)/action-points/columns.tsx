@@ -7,38 +7,22 @@ import {
 } from '@/app/server/actions/action-point'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { ActionPoint } from '@prisma/client'
 import { ColumnDef } from '@tanstack/react-table'
 import Link from 'next/link'
-import {
-  ArrowLeftRight,
-  CircleCheck,
-  EllipsisVertical,
-  FileSymlink,
-  Hourglass,
-  Trash2,
-} from 'lucide-react'
+import { ArrowLeftRight, CircleCheck, EllipsisVertical, FileSymlink, Hourglass, Trash2 } from 'lucide-react'
 import { Dialog } from '@/components/ui/dialog'
 import ResolveActionPointForm from '@/app/_components/resolve-action-point-form'
 import { DialogTrigger } from '@radix-ui/react-dialog'
 import { useRouter } from 'next/navigation'
-
 
 export const columns: ColumnDef<ActionPoint>[] = [
   {
     header: 'Created At',
     accessorKey: 'createdAt',
     cell: ({ row }) => (
-      <span
-        suppressHydrationWarning
-        className="font-mono text-muted-foreground"
-      >
+      <span suppressHydrationWarning className="font-mono text-muted-foreground">
         {new Date(row.original.createdAt).toLocaleDateString()}
       </span>
     ),
@@ -116,17 +100,13 @@ export const columns: ColumnDef<ActionPoint>[] = [
                 <button
                   className={'flex w-full items-center gap-1'}
                   onClick={() => {
-                    row.original.resolved &&
-                       unresolveActionPointById(row.original.id)
+                    row.original.resolved && unresolveActionPointById(row.original.id)
                   }}
                 >
                   Unresolve
                 </button>
               ) : (
-                <DialogTrigger
-                  asChild
-                  className={'flex w-full items-center gap-1'}
-                >
+                <DialogTrigger asChild className={'flex w-full items-center gap-1'}>
                   <button>
                     <ArrowLeftRight size={14} /> Resolve
                   </button>

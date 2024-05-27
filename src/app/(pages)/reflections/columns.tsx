@@ -4,18 +4,9 @@ import { deleteReflectionById } from '@/app/server/actions'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { ActionPoint, Reflection } from '@prisma/client'
-import {
-  HoverCard,
-  HoverCardTrigger,
-  HoverCardContent,
-} from '@radix-ui/react-hover-card'
+import { HoverCard, HoverCardTrigger, HoverCardContent } from '@radix-ui/react-hover-card'
 import { Separator } from '@radix-ui/react-separator'
 import { ColumnDef } from '@tanstack/react-table'
 import { motion } from 'framer-motion'
@@ -29,10 +20,7 @@ export const columns: ColumnDef<Reflection>[] = [
     header: 'Created At',
     accessorKey: 'createdAt',
     cell: ({ row }) => (
-      <span
-        suppressHydrationWarning
-        className="font-mono text-muted-foreground"
-      >
+      <span suppressHydrationWarning className="font-mono text-muted-foreground">
         {new Date(row.original.createdAt).toLocaleDateString()}
       </span>
     ),
@@ -42,10 +30,7 @@ export const columns: ColumnDef<Reflection>[] = [
     header: 'Title',
     accessorKey: 'title',
     cell: ({ row }) => (
-      <Link
-        href={`/reflections/${row.original.id.toString()}`}
-        className="line-clamp-1 font-semibold hover:underline"
-      >
+      <Link href={`/reflections/${row.original.id.toString()}`} className="line-clamp-1 font-semibold hover:underline">
         {row.original.title}
       </Link>
     ),
@@ -55,19 +40,14 @@ export const columns: ColumnDef<Reflection>[] = [
     accessorKey: 'progress',
     cell: ({ row }) => {
       const actionPoints: [] = row.getValue('actionPoints')
-      const resolvedActionPoints = actionPoints.filter(
-        (actionPoint: ActionPoint) => actionPoint.resolved,
-      )
+      const resolvedActionPoints = actionPoints.filter((actionPoint: ActionPoint) => actionPoint.resolved)
 
       return (
-        <div className='flex items-center gap-2'>
-        <Progress
-          value={(resolvedActionPoints.length / actionPoints.length) * 100}
-          className='min-w-[100px]'
-        />
-        <span className="text-muted-foreground text-xs">
-          {resolvedActionPoints.length}/{actionPoints.length}
-        </span>
+        <div className="flex items-center gap-2">
+          <Progress value={(resolvedActionPoints.length / actionPoints.length) * 100} className="min-w-[100px]" />
+          <span className="text-xs text-muted-foreground">
+            {resolvedActionPoints.length}/{actionPoints.length}
+          </span>
         </div>
       )
     },
@@ -105,8 +85,7 @@ export const columns: ColumnDef<Reflection>[] = [
                           {index !== 0 && <Separator />}
                           <Link href={`/action-points/${actionPoint.id}`}>
                             <span className="font-muted-foreground line-clamp-1 hover:underline">
-                              <Zap className="mr-2 inline " size={14} />{' '}
-                              {actionPoint.title}
+                              <Zap className="mr-2 inline " size={14} /> {actionPoint.title}
                             </span>
                           </Link>
                         </motion.div>

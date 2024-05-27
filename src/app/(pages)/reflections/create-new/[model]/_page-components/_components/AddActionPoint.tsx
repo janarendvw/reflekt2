@@ -23,10 +23,7 @@ type AddActionPointProps = {
   setActionPoints: (actionPoints: { title: string; content: string }[]) => void
 }
 
-function AddActionPoint({
-  actionPoints,
-  setActionPoints,
-}: AddActionPointProps) {
+function AddActionPoint({ actionPoints, setActionPoints }: AddActionPointProps) {
   const [acionPointTitle, setActionPointTitle] = useState<string>('')
   const [actionPointContent, setActionPointContent] = useState<string>('')
   const addButtonRef = React.useRef<HTMLButtonElement>(null)
@@ -38,10 +35,7 @@ function AddActionPoint({
   }, [])
 
   const addActionPoint = () => {
-    setActionPoints([
-      ...actionPoints,
-      { title: acionPointTitle, content: actionPointContent },
-    ])
+    setActionPoints([...actionPoints, { title: acionPointTitle, content: actionPointContent }])
     setActionPointTitle('')
     setActionPointContent('')
   }
@@ -65,9 +59,7 @@ function AddActionPoint({
             )
           })
         ) : (
-          <span className="text-muted-foreground">
-            No action-points have been added yet...{' '}
-          </span>
+          <span className="text-muted-foreground">No action-points have been added yet... </span>
         )}
       </AnimatePresence>
 
@@ -78,18 +70,14 @@ function AddActionPoint({
             variant={actionPoints.length < 1 ? 'default' : 'outline'}
             className="flex w-fit items-center gap-2"
           >
-            <PlusCircle size={16} />{' '}
-            {actionPoints.length > 0 ? 'Add another' : 'Add one'}
+            <PlusCircle size={16} /> {actionPoints.length > 0 ? 'Add another' : 'Add one'}
           </Button>
         </DialogTrigger>
         <DialogContent className="container">
           <DialogHeader>
             <DialogTitle>Create new action-point</DialogTitle>
             <DialogDescription>
-              <Alert
-                variant={'default'}
-                className="bg-info text-info-foreground"
-              >
+              <Alert variant={'default'} className="bg-info text-info-foreground">
                 <Info className="stroke-info-foreground" />
                 <AlertTitle>
                   Want a little help creating amazing and tangible goals?
@@ -105,7 +93,7 @@ function AddActionPoint({
             <Label htmlFor="action-point-title">Title</Label>
             <Input
               value={acionPointTitle}
-              onChange={(e) => setActionPointTitle(e.target.value)}
+              onChange={e => setActionPointTitle(e.target.value)}
               placeholder={'Enter a title'}
               id="action-point-title"
             />
@@ -117,7 +105,7 @@ function AddActionPoint({
               placeholder="Describe your planned improvement well and make it concrete."
               className="h-56"
               value={actionPointContent}
-              onChange={(e) => setActionPointContent(e.target.value)}
+              onChange={e => setActionPointContent(e.target.value)}
             />
           </div>
           <DialogFooter>

@@ -22,7 +22,7 @@ export const createReflection = async (
           },
         },
         actionPoints: {
-          create: actionPoints.map((point) => ({
+          create: actionPoints.map(point => ({
             title: point.title,
             content: point.content,
             resolved: false,

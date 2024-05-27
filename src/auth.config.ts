@@ -1,6 +1,6 @@
-import GitHub from "next-auth/providers/github";
-import Google from "next-auth/providers/google";
-import type { NextAuthConfig } from "next-auth";
+import GitHub from 'next-auth/providers/github'
+import Google from 'next-auth/providers/google'
+import type { NextAuthConfig } from 'next-auth'
 
 export default {
   providers: [
@@ -14,18 +14,18 @@ export default {
       clientSecret: process.env.GOOGLE_SECRET,
       allowDangerousEmailAccountLinking: true,
     }),
-   
   ],
   callbacks: {
     jwt({ token, user }) {
-      if (user) { // User is available during sign-in
-        token.id = user.id as string;
+      if (user) {
+        // User is available during sign-in
+        token.id = user.id as string
       }
-      return token;
+      return token
     },
     session({ session, token }) {
-      session.user.id = token.id as string;
-      return session;
+      session.user.id = token.id as string
+      return session
     },
   },
-} as NextAuthConfig;
+} as NextAuthConfig

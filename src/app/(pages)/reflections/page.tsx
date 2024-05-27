@@ -14,22 +14,22 @@ function Page({}: Props) {
   const [activeTags, setActiveTags] = React.useState<string[]>([])
   const [tagButtons, setTagButtons] = React.useState<string[]>([])
   const [pending, setPending] = React.useState<boolean>(true)
-  const [filteredReflections, setFilteredReflections] = React.useState<
-    Reflection[]
-  >([])
+  const [filteredReflections, setFilteredReflections] = React.useState<Reflection[]>([])
   React.useEffect(() => {
-    getReflections().then((data) => setReflections(data)).finally(() => {
-      setPending(false)
-    })
+    getReflections()
+      .then(data => setReflections(data))
+      .finally(() => {
+        setPending(false)
+      })
   }, [])
 
   React.useEffect(() => {
     if (activeTags.length === 0) {
-      const tags = reflections.flatMap((reflection) => reflection.tags)
+      const tags = reflections.flatMap(reflection => reflection.tags)
       const uniqueTags = Array.from(new Set(tags))
       setTagButtons(uniqueTags)
     } else {
-      const tags = filteredReflections.flatMap((reflection) => reflection.tags)
+      const tags = filteredReflections.flatMap(reflection => reflection.tags)
       const uniqueTags = Array.from(new Set(tags))
       setTagButtons(uniqueTags)
     }
@@ -37,25 +37,17 @@ function Page({}: Props) {
 
   const filterByTag = (tag: string) => {
     if (activeTags.includes(tag)) {
-      let updatedTags = activeTags.filter((t) => t !== tag)
+      let updatedTags = activeTags.filter(t => t !== tag)
       setActiveTags(updatedTags)
-      updatedTags.forEach((t) => {
-        setFilteredReflections(
-          reflections.filter((reflection) => reflection.tags.includes(t)),
-        )
+      updatedTags.forEach(t => {
+        setFilteredReflections(reflections.filter(reflection => reflection.tags.includes(t)))
       })
     } else {
       setActiveTags([...activeTags, tag])
       if (activeTags.length === 0) {
-        setFilteredReflections(
-          reflections.filter((reflection) => reflection.tags.includes(tag)),
-        )
+        setFilteredReflections(reflections.filter(reflection => reflection.tags.includes(tag)))
       } else {
-        setFilteredReflections(
-          filteredReflections.filter((reflection) =>
-            reflection.tags.includes(tag),
-          ),
-        )
+        setFilteredReflections(filteredReflections.filter(reflection => reflection.tags.includes(tag)))
       }
     }
   }
@@ -64,7 +56,7 @@ function Page({}: Props) {
     <div>
       <div className="my-4 flex items-center gap-4">
         Filter by tags:
-        {tagButtons.map((tag) => (
+        {tagButtons.map(tag => (
           <motion.div key={tag} layoutId={tag} transition={{ duration: 0.15 }}>
             <Button
               onClick={() => filterByTag(tag)}
@@ -76,11 +68,7 @@ function Page({}: Props) {
           </motion.div>
         ))}
       </div>
-      <DataTable
-        columns={columns}
-        data={activeTags.length ? filteredReflections : reflections}
-        pending={pending}
-      />
+      <DataTable columns={columns} data={activeTags.length ? filteredReflections : reflections} pending={pending} />
     </div>
   )
 }

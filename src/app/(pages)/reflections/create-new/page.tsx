@@ -1,13 +1,6 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { ReflectionModelType } from '@prisma/client'
 import { MotionConfig, motion } from 'framer-motion'
 import { ChevronRight } from 'lucide-react'
@@ -41,12 +34,8 @@ function BigButton({ model, index }: Props) {
       >
         <Card className="rounded-md shadow-none">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold capitalize">
-              {model}
-            </CardTitle>
-            <CardDescription>
-              Start a new reflection using the {model} model
-            </CardDescription>
+            <CardTitle className="text-xl font-semibold capitalize">{model}</CardTitle>
+            <CardDescription>Start a new reflection using the {model} model</CardDescription>
           </CardHeader>
           <CardContent>{content}</CardContent>
           <CardFooter>

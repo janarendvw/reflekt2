@@ -16,7 +16,7 @@ type Props = {}
 function NavbarBreadcrumb({}: Props) {
   const pathArray = usePathname()
     .split('/')
-    .filter((path) => path !== '')
+    .filter(path => path !== '')
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -37,9 +37,7 @@ function NavbarBreadcrumb({}: Props) {
                       {path}
                     </BreadcrumbLink>
                   ) : (
-                    <BreadcrumbPage className="font-semibold">
-                      {path}
-                    </BreadcrumbPage>
+                    <BreadcrumbPage className="font-semibold">{path}</BreadcrumbPage>
                   )}
                 </BreadcrumbItem>
               </motion.div>

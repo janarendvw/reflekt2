@@ -18,9 +18,7 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
   const [tags, setTags] = useState<string[]>([])
   const [pending, setPending] = useState<boolean>(false)
   const [page, setPage] = useState<number>(0)
-  const [actionPoints, setActionPoints] = useState<
-    { title: string; content: string }[]
-  >([])
+  const [actionPoints, setActionPoints] = useState<{ title: string; content: string }[]>([])
   const session = useSession()
 
   const handleSubmit = async () => {
@@ -32,9 +30,7 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
       tags: tags,
     }
     setPending(true)
-    await createReflection(reflection, actionPoints).finally(() =>
-      setPending(false),
-    )
+    await createReflection(reflection, actionPoints).finally(() => setPending(false))
   }
 
   return (
@@ -49,27 +45,9 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
         )}
       </h1>
       <div className="row-start-2">
-        {page === 0 && (
-          <PageMetadata
-            title={title}
-            setTitle={setTitle}
-            tags={tags}
-            setTags={setTags}
-          />
-        )}
-        {page === 1 && (
-          <PageReflection
-            content={content}
-            setContent={setContent}
-            model={params.model}
-          />
-        )}
-        {page === 2 && (
-          <PageActionPoints
-            actionPoints={actionPoints}
-            setActionPoints={setActionPoints}
-          />
-        )}
+        {page === 0 && <PageMetadata title={title} setTitle={setTitle} tags={tags} setTags={setTags} />}
+        {page === 1 && <PageReflection content={content} setContent={setContent} model={params.model} />}
+        {page === 2 && <PageActionPoints actionPoints={actionPoints} setActionPoints={setActionPoints} />}
       </div>
 
       <motion.div
@@ -92,7 +70,7 @@ function Page({ params }: { params: { model: ReflectionModelType } }) {
           <span id="placeholder"></span>
         )}
         <Button
-        tabIndex={0}
+          tabIndex={0}
           disabled={pending}
           variant={!actionPoints.length && page === 2 ? 'secondary' : 'default'}
           className="flex w-1/3 items-center gap-2"
