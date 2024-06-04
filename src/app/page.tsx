@@ -1,11 +1,9 @@
 'use client'
 import { Button } from '@/components/ui/button'
-import Image from 'next/image'
-import { getTotalActionPointCount } from './server/actions/action-point'
 import MatrixBackgound from './_components/matrix-background'
 import { useRouter } from 'next/navigation'
-import { Book, ChevronRight, Redo, Rocket } from 'lucide-react'
-import { use, useEffect, useState } from 'react'
+import { Book, Rocket } from 'lucide-react'
+import { useState } from 'react'
 
 export default function Home() {
   const router = useRouter()
@@ -21,10 +19,10 @@ export default function Home() {
           {title} <span>IMPROVE</span> <span className="text-primary">CONQUER</span>
         </h1>
         <div className="mt-16 flex items-center gap-4">
-          <Button variant="outline" size="lg" onClick={() => router.push('/reflections')}>
+          <Button variant="outline" size="lg" onClick={() => router.push('/guide/reflections')}>
             <Book size={16} className="mr-2" /> Learn more
           </Button>
-          <Button variant="default" size="lg" onClick={() => router.push('/reflections')}>
+          <Button variant="default" size="lg" onClick={() => router.push('/home/reflections')}>
             <Rocket size={16} className="mr-2" /> Get started
           </Button>
         </div>

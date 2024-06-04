@@ -3,9 +3,7 @@ import React, { useEffect } from 'react'
 import { signIn, signOut, useSession } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import NavbarBreadcrumb from './NavBarBreadcrumb'
-import Image from 'next/image'
-import Logo from './Logo'
+import Logo from './logo'
 
 function AuthButton() {
   const session = useSession()

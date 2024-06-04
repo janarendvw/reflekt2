@@ -1,21 +1,22 @@
 'use client'
-import React, { Suspense } from 'react'
 import { DataTable } from '../../_components/data-table'
 import { columns } from './columns'
 import { getReflections } from '@/app/server/actions/reflection'
 import { Reflection } from '@prisma/client'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
 type Props = {}
 
 function Page({}: Props) {
-  const [reflections, setReflections] = React.useState<Reflection[]>([])
-  const [activeTags, setActiveTags] = React.useState<string[]>([])
-  const [tagButtons, setTagButtons] = React.useState<string[]>([])
-  const [pending, setPending] = React.useState<boolean>(true)
-  const [filteredReflections, setFilteredReflections] = React.useState<Reflection[]>([])
-  React.useEffect(() => {
+  const [reflections, setReflections] = useState<Reflection[]>([])
+  const [activeTags, setActiveTags] = useState<string[]>([])
+  const [tagButtons, setTagButtons] = useState<string[]>([])
+  const [pending, setPending] = useState<boolean>(true)
+  const [filteredReflections, setFilteredReflections] = useState<Reflection[]>([])
+  
+  useEffect(() => {
     getReflections()
       .then(data => setReflections(data))
       .finally(() => {
@@ -23,7 +24,7 @@ function Page({}: Props) {
       })
   }, [])
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (activeTags.length === 0) {
       const tags = reflections.flatMap(reflection => reflection.tags)
       const uniqueTags = Array.from(new Set(tags))

@@ -2,7 +2,7 @@
 import { Separator } from '@/components/ui/separator'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
-import { FlipHorizontal2, Home, Sparkle, Zap } from 'lucide-react'
+import { FlipHorizontal2, Sparkle, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'

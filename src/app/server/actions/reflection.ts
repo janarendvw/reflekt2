@@ -3,6 +3,7 @@
 import { auth } from '@/auth'
 import prisma from '@/lib/client'
 import { Reflection } from '@prisma/client'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 export const createReflection = async (
@@ -55,3 +56,16 @@ export const getReflections = async () => {
     },
   })
 }
+
+export async function deleteReflectionById(id: number) {
+  const res = await prisma.reflection
+    .delete({
+      where: {
+        id,
+      },
+    })
+    .then(res => {
+      return revalidatePath('/reflections')
+    })
+}
+

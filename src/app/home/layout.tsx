@@ -1,9 +1,9 @@
 import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable'
 import { Separator } from '@/components/ui/separator'
 import React from 'react'
-import NavBar from '../_components/NavBar'
-import NavbarBreadcrumb from '../_components/NavBarBreadcrumb'
-import SideBar from '../_components/SideBar'
+import NavBar from '../_components/nav-bar'
+import NavbarBreadcrumb from '../_components/nav-bar-breadcrumb'
+import SideBar from '../_components/side-bar'
 import { auth } from '@/auth'
 import { redirect } from 'next/navigation'
 

@@ -1,9 +1,7 @@
 'use client'
 
-import { deleteReflectionById } from '@/app/server/actions'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { ActionPoint, Reflection } from '@prisma/client'
 import { HoverCard, HoverCardTrigger, HoverCardContent } from '@radix-ui/react-hover-card'
@@ -14,6 +12,7 @@ import Link from 'next/link'
 import React from 'react'
 import { EllipsisVertical, Zap } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
+import { deleteReflectionById } from '@/app/server/actions/reflection'
 
 export const columns: ColumnDef<Reflection>[] = [
   {
