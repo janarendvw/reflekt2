@@ -45,7 +45,7 @@ export const columns: ColumnDef<ActionPoint>[] = [
     header: 'Status',
     accessorKey: 'resolved',
     cell: ({ row }) => (
-      <Badge variant={row.original.resolved ? 'default' : 'outline'}>
+      <Badge variant={row.original.resolved ? 'success' : 'outline'}>
         {row.original.resolved ? (
           <span className="flex items-center gap-1">
             <CircleCheck size={14} /> Resolved
