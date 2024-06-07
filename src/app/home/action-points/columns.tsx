@@ -33,7 +33,7 @@ export const columns: ColumnDef<ActionPoint>[] = [
     accessorKey: 'title',
     cell: ({ row }) => (
       <Link
-        href={`/action-points/${row.original.id.toString()}`}
+        href={`/home/action-points/${row.original.id.toString()}`}
         className="line-clamp-1 font-semibold hover:underline"
       >
         {row.original.title}
@@ -65,7 +65,7 @@ export const columns: ColumnDef<ActionPoint>[] = [
     accessorKey: 'reflection',
     cell: ({ row }) => (
       <Link
-        href={`/reflections/${row.original.reflectionId.toString()}`}
+        href={`/home/reflections/${row.original.reflectionId.toString()}`}
         className="line-clamp-1 flex items-center gap-1 font-semibold hover:underline"
       >
         <FileSymlink size={14} /> Link

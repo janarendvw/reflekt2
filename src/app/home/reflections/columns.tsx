@@ -29,7 +29,7 @@ export const columns: ColumnDef<Reflection>[] = [
     header: 'Title',
     accessorKey: 'title',
     cell: ({ row }) => (
-      <Link href={`/reflections/${row.original.id.toString()}`} className="line-clamp-1 font-semibold hover:underline">
+      <Link href={`/home/reflections/${row.original.id.toString()}`} className="line-clamp-1 font-semibold hover:underline">
         {row.original.title}
       </Link>
     ),
@@ -82,7 +82,7 @@ export const columns: ColumnDef<Reflection>[] = [
                           key={actionPoint.id}
                         >
                           {index !== 0 && <Separator />}
-                          <Link href={`/action-points/${actionPoint.id}`}>
+                          <Link href={`/home/action-points/${actionPoint.id}`}>
                             <span className="font-muted-foreground line-clamp-1 hover:underline">
                               <Zap className="mr-2 inline " size={14} /> {actionPoint.title}
                             </span>
