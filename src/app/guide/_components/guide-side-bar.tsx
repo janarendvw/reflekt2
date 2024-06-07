@@ -1,7 +1,10 @@
 'use server'
 import React, { Children } from 'react'
-import NavBarLink from './NavBarLink'
+import GuideSideBarLink from './guide-side-bar-link'
 import { Separator } from '@/components/ui/separator'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { ArrowLeft } from 'lucide-react'
 
 type Props = {}
 
@@ -15,9 +18,9 @@ const guideLinks = [
         title: 'Models',
         href: '/guide/reflections/models',
         children: [
-          { title: 'STARR', href: '/guide/reflections/starr' },
-          { title: 'Korthagen', href: '/guide/reflections/Korthagen' },
-          { title: 'Default', href: '/guide/reflections/default' },
+          { title: 'STARR', href: '/guide/reflections/models/starr' },
+          { title: 'Korthagen', href: '/guide/reflections/models/Korthagen' },
+          { title: 'Default', href: '/guide/reflections/models/default' },
         ],
       },
       {
@@ -44,19 +47,25 @@ const guideLinks = [
       {
         title: 'Resolving',
         href: '/guide/action-points/resolving',
-      }
+      },
     ],
   },
 ]
 
-async function NavBar({}: Props) {
+async function GuideSideBar({}: Props) {
   return (
-    <div className="h-full border-l py-8 px-12 w-max">
-      <h1 className="text-lg font-bold">Guide</h1>
-      <Separator />
-      <NavBarLink data={guideLinks} />
+    <div className="h-full w-max min-w-64 border-l bg-foreground/5 p-8">
+      <Link href="/home" >
+        <Button variant={'default'} className='w-full mb-8'>
+          <ArrowLeft size={16} className="mr-2" />
+          Back to Reflekt
+        </Button>
+      </Link>
+      <h1 className="text-2xl font-bold">Guide</h1>
+      <Separator className="mb-4 mt-0.5" />
+      <GuideSideBarLink data={guideLinks} />
     </div>
   )
 }
 
-export default NavBar
+export default GuideSideBar

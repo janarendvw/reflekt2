@@ -37,7 +37,7 @@ export const createReflection = async (
       },
     })
     .then(() => {
-      redirect('/reflections')
+      redirect('/home/reflections')
     })
 }
 

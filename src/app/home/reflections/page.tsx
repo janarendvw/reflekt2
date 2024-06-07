@@ -15,7 +15,7 @@ function Page({}: Props) {
   const [tagButtons, setTagButtons] = useState<string[]>([])
   const [pending, setPending] = useState<boolean>(true)
   const [filteredReflections, setFilteredReflections] = useState<Reflection[]>([])
-  
+
   useEffect(() => {
     getReflections()
       .then(data => setReflections(data))

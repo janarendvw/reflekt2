@@ -108,4 +108,5 @@ model ActionPoint {
   updatedAt    DateTime   @updatedAt
   resolved     Boolean
   resolution   String?
+  attatchments String[]
 }
