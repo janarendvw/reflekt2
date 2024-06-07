@@ -2,10 +2,11 @@
 
 import ResolveActionPointForm from '@/app/_components/resolve-action-point-form'
 import { getActionPointById } from '@/app/server/actions/action-point'
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
-import { CheckCircle } from 'lucide-react'
+import { CheckCircle, FileCheck2 } from 'lucide-react'
 
 async function Page({ params }: { params: { actionPoint: string } }) {
   const actionPoint = await getActionPointById(Number(params.actionPoint))
@@ -13,20 +14,32 @@ async function Page({ params }: { params: { actionPoint: string } }) {
   return (
     <div className="mx-auto w-full max-w-screen-md">
       <h1 className="text-2xl font-semibold capitalize">{actionPoint?.title}</h1>
-      <p className="mb-4 font-mono text-sm text-gray-500">
+      <div className="mb-4 font-mono text-sm text-gray-500">
         {actionPoint?.createdAt.toLocaleDateString()} -{' '}
-        {actionPoint?.resolved ? <span className="text-primary">Resolved</span> : 'Open'}
-      </p>
+        {actionPoint?.resolved ? <Badge className="text-success font-bold bg-success/10">Resolved</Badge> : 'Open'}
+      </div>
       <p className="text-lg">{actionPoint?.content}</p>
       {actionPoint?.resolution ? (
         <>
-          <Separator className="my-8" />
           <div>
-            <h2 className="flex items-center gap-2 text-xl font-semibold capitalize text-primary">
+            <h2 className="text-success bg-success/10 mt-16 flex items-center gap-2 rounded-md px-4 py-2 text-xl font-semibold capitalize">
               <CheckCircle size={16} />
               Resolution
             </h2>
-            <p>{actionPoint.resolution}</p>
+            <p className="mt-2 p-4">{actionPoint.resolution}</p>
+          </div>
+
+          <h2 className="text-foreground bg-foreground/10 mt-12 flex items-center gap-2 rounded-md px-4 py-2 text-xl font-semibold capitalize">
+            <FileCheck2 size={16} />
+            Proof of resolution
+          </h2>
+
+          <div className="mt-2 flex flex-col gap-2 p-4">
+            {actionPoint.attatchments.map((proof, i) => (
+              <a key={i} href={proof} className="underline">
+                {proof}
+              </a>
+            ))}
           </div>
         </>
       ) : (
