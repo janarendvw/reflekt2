@@ -22,14 +22,14 @@ async function Page({ params }: { params: { actionPoint: string } }) {
       {actionPoint?.resolution ? (
         <>
           <div>
-            <h2 className="text-success bg-success/10 mt-16 flex items-center gap-2 rounded-md px-4 py-2 text-xl font-semibold capitalize">
+            <h2 className="text-success bg-success/10 mt-16 flex items-center gap-2 rounded-md px-3 py-2 font-semibold capitalize">
               <CheckCircle size={16} />
               Resolution
             </h2>
             <p className="mt-2 p-4">{actionPoint.resolution}</p>
           </div>
 
-          <h2 className="text-foreground bg-foreground/10 mt-12 flex items-center gap-2 rounded-md px-4 py-2 text-xl font-semibold capitalize">
+          <h2 className="text-foreground bg-foreground/5 mt-12 flex items-center gap-2 rounded-md px-3 py-2 font-semibold capitalize">
             <FileCheck2 size={16} />
             Proof of resolution
           </h2>
