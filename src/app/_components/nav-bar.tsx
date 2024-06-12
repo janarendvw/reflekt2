@@ -4,19 +4,21 @@ import { signIn, signOut, useSession } from 'next-auth/react'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import Logo from './logo'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
+import { DoorOpen } from 'lucide-react'
 
 function AuthButton() {
   const session = useSession()
 
   if (session) {
     return (
-      <Button size={'sm'} variant={'outline'} onClick={() => signOut()}>
-        Sign out
+      <Button size={'sm'} variant={'destructive'} className='w-full' onClick={() => signOut()}>
+       <DoorOpen size={16} className='mr-2' /> Sign out
       </Button>
     )
   } else {
     return (
-      <Button size={'sm'} variant={'outline'} onClick={() => signIn()}>
+      <Button size={'sm'} variant={'outline'} className='w-full' onClick={() => signIn()}>
         Sign in
       </Button>
     )
@@ -40,11 +42,18 @@ function NavBar({}: Props) {
     <div className="flex items-center justify-between px-4 py-2">
       <Logo />
       <div className="flex items-center gap-4">
-        <Avatar>
-          <AvatarImage src={image} />
-          <AvatarFallback>{session?.data?.user?.name?.[0].toUpperCase() ?? ''}</AvatarFallback>
-        </Avatar>
-        <AuthButton />
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Avatar>
+              <AvatarImage src={image} />
+              <AvatarFallback>{session?.data?.user?.name?.[0].toUpperCase() ?? ''}</AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+          <AuthButton />
+
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
     </div>
   )
