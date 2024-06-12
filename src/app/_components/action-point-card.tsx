@@ -123,16 +123,18 @@ function ActionPointCard({ actionPoint, index, className, resolved, resolution, 
               <Link2 size={16} />
             </div>
           )}
-          <div className="col-start-2">
-            <h5 className="font-bold">Proof of resolution</h5>
-            <div className="flex flex-col gap-1 max-h-56 overflow-y-auto">
-              {actionPoint.attatchments.map((proof, i) => (
-                <a key={i} href={proof} target="_blank" className="underline">
-                  {proof}
-                </a>
-              ))}
+          {actionPoint.attatchments.length > 0 && (
+            <div className="col-start-2">
+              <h5 className="font-bold">Proof of resolution</h5>
+              <div className="flex max-h-56 flex-col gap-1 overflow-y-auto">
+                {actionPoint.attatchments.map((proof, i) => (
+                  <a key={i} href={proof} target="_blank" className="underline">
+                    {proof}
+                  </a>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </motion.div>
