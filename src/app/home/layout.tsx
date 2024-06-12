@@ -20,7 +20,7 @@ async function Layout({ children }: MainLayoutProps) {
   }
 
   return (
-    <main className="flex h-screen flex-col">
+    <main className="flex h-screen flex-col overflow-hidden">
       <NavBar />
 
       <Separator />
@@ -31,7 +31,7 @@ async function Layout({ children }: MainLayoutProps) {
             <NavbarBreadcrumb />
           </div>
           <main
-            style={{ maxHeight: 'calc(100vh - 70px)' }}
+            style={{ maxHeight: 'calc(100vh - 90px)' }}
             className="container flex h-full w-full flex-col overflow-y-auto py-20"
           >
             {children}
