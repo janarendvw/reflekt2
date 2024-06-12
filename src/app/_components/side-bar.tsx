@@ -25,7 +25,7 @@ const links = [
 function SideBar({}: Props) {
   const pathname = usePathname()
   return (
-    <div className="flex h-full w-full flex-col justify-between px-2 py-2">
+    <div className="md:flex hidden border-r h-full w-1/3 max-w-[300px] flex-col justify-between px-2 py-2">
       <div className="flex flex-col items-center gap-2">
         <Link
           href={'/home/reflections/create-new'}

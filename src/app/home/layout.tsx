@@ -24,23 +24,20 @@ async function Layout({ children }: MainLayoutProps) {
       <NavBar />
 
       <Separator />
-      <ResizablePanelGroup direction="horizontal">
-        <ResizablePanel defaultSize={10}>
+      <div className='flex h-full'>
           <SideBar />
-        </ResizablePanel>
-        <ResizableHandle />
-        <ResizablePanel style={{ maxHeight: 'calc(100vh - 70px)' }} defaultSize={85} className="relative">
+        <div style={{ maxHeight: 'calc(100vh - 70px)' }} className="relative w-full">
           <div className="flex w-full items-center border-b border-secondary bg-secondary/50 px-4 py-2">
             <NavbarBreadcrumb />
           </div>
           <main
             style={{ maxHeight: 'calc(100vh - 70px)' }}
-            className="container flex h-full flex-col overflow-y-auto py-20"
+            className="container flex h-full w-full flex-col overflow-y-auto py-20"
           >
             {children}
           </main>
-        </ResizablePanel>
-      </ResizablePanelGroup>
+        </div>
+      </div>
     </main>
   )
 }

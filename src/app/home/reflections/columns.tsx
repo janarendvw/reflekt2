@@ -16,7 +16,7 @@ import { deleteReflectionById } from '@/app/server/actions/reflection'
 
 export const columns: ColumnDef<Reflection>[] = [
   {
-    header: 'Created At',
+    header: 'Created_at',
     accessorKey: 'createdAt',
     cell: ({ row }) => (
       <span suppressHydrationWarning className="font-mono text-muted-foreground">

@@ -53,6 +53,9 @@ dependencies:
   '@radix-ui/react-slot':
     specifier: ^1.0.2
     version: 1.0.2(@types/react@18.3.2)(react@18.3.1)
+  '@react-hook/resize-observer':
+    specifier: ^2.0.1
+    version: 2.0.1(react@18.3.1)
   '@tanstack/react-table':
     specifier: ^8.16.0
     version: 8.17.0(react-dom@18.3.1)(react@18.3.1)
@@ -374,6 +377,10 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.4.15
+
+  /@juggle/resize-observer@3.4.0:
+    resolution: {integrity: sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==}
+    dev: false
 
   /@next/env@14.2.3:
     resolution: {integrity: sha512-W7fd7IbkfmeeY2gXrzJYDx8D2lWKbVoTIj1o1ScPHNzvp30s1AuoEFSdr39bC5sjxJaxTtq3OTCZboNp0lNWHA==}
@@ -1231,6 +1238,33 @@ packages:
     resolution: {integrity: sha512-fyrgCaedtvMg9NK3en0pnOYJdtfwxUcNolezkNPUsoX57X8oQk+NkqcvzHXD2uKNij6GXmWU9NDru2IWjrO4BQ==}
     dependencies:
       '@babel/runtime': 7.24.5
+    dev: false
+
+  /@react-hook/latest@1.0.3(react@18.3.1):
+    resolution: {integrity: sha512-dy6duzl+JnAZcDbNTfmaP3xHiKtbXYOaz3G51MGVljh548Y8MWzTr+PHLOfvpypEVW9zwvl+VyKjbWKEVbV1Rg==}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      react: 18.3.1
+    dev: false
+
+  /@react-hook/passive-layout-effect@1.2.1(react@18.3.1):
+    resolution: {integrity: sha512-IwEphTD75liO8g+6taS+4oqz+nnroocNfWVHWz7j+N+ZO2vYrc6PV1q7GQhuahL0IOR7JccFTsFKQ/mb6iZWAg==}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      react: 18.3.1
+    dev: false
+
+  /@react-hook/resize-observer@2.0.1(react@18.3.1):
+    resolution: {integrity: sha512-9PCX9grWfxdPizY8ohr+X4IkV1JhGMWr2Nm4ngbg6IcAIv0WBs7YoJcNBqYl22OqPHr5eOMItGcStZrmj2mbmQ==}
+    peerDependencies:
+      react: '>=18'
+    dependencies:
+      '@juggle/resize-observer': 3.4.0
+      '@react-hook/latest': 1.0.3(react@18.3.1)
+      '@react-hook/passive-layout-effect': 1.2.1(react@18.3.1)
+      react: 18.3.1
     dev: false
 
   /@rushstack/eslint-patch@1.10.2:
