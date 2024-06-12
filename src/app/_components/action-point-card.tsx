@@ -11,8 +11,20 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { cn } from '@/lib/utils'
 import { motion } from 'framer-motion'
-import { Zap, Trash2, EllipsisVertical, Edit, Wrench, CheckCircle, ArrowLeftRight, ArrowRightLeft } from 'lucide-react'
-import React, { ComponentPropsWithoutRef } from 'react'
+import {
+  Zap,
+  Trash2,
+  EllipsisVertical,
+  Edit,
+  Wrench,
+  CheckCircle,
+  ArrowLeftRight,
+  ArrowRightLeft,
+  Link2,
+  UnfoldVertical,
+  ChevronsUpDown,
+} from 'lucide-react'
+import React, { ComponentPropsWithoutRef, act } from 'react'
 import { Separator } from '@/components/ui/separator'
 import { Dialog } from '@/components/ui/dialog'
 import { DialogTrigger } from '@radix-ui/react-dialog'
@@ -20,6 +32,10 @@ import ResolveActionPointForm from './resolve-action-point-form'
 import { ActionPoint } from '@prisma/client'
 import { unresolveActionPointById } from '../server/actions/action-point'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible'
+import { CaretSortIcon } from '@radix-ui/react-icons'
+import { Button } from '@/components/ui/button'
 
 type Props = {
   actionPoint: ActionPoint
@@ -47,16 +63,17 @@ function ActionPointCard({ actionPoint, index, className, resolved, resolution, 
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={cn(className, 'grid grid-cols-[auto_1fr_auto] gap-2 rounded-md border px-3 py-4', {
-        ' border-green-600/50 bg-green-600/10': resolved,
-      })}
+      className={cn(className, 'grid grid-cols-[auto_1fr_auto] gap-2 rounded-md border')}
     >
-      <div className="col-start-1 flex flex-col p-1">{resolved ? <Zap size={16} /> : <Zap size={16} />}</div>
-      <div className="col-start-2">
-        <h5 className="font-bold">{actionPoint.title}</h5>
-        <p className="text-muted-foreground">{actionPoint.content}</p>
-      </div>
-      <div className="col-start-3">
+      <div className="col-start-1 flex flex-col py-5 pl-4 pr-1">{resolved ? <Zap size={16} /> : <Zap size={16} />}</div>
+      <Link href={'/home/action-points/' + actionPoint.id} className="group">
+        <div className="col-start-2 py-4">
+          <h5 className="font-bold group-hover:underline">{actionPoint.title}</h5>
+          <p className="text-muted-foreground">{actionPoint.content}</p>
+        </div>
+      </Link>
+
+      <div className="col-start-3 py-4 pr-3">
         <Dialog>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -93,17 +110,30 @@ function ActionPointCard({ actionPoint, index, className, resolved, resolution, 
       </div>
 
       {resolution && (
-        <>
-          <Separator className="col-span-3 row-start-2 my-2" />
-          <div className="col-start-1 row-start-3 p-1 text-primary">
+        <div className="col-span-3 m-2 grid grid-cols-[auto_1fr_auto] gap-2 rounded-md border border-success/50 bg-gradient-to-b from-success/20 to-success/10 px-3 py-4">
+          <div className="col-start-1 p-1 text-success">
             <CheckCircle size={16} />
           </div>
-          <div className="col-start-2 row-start-3 text-primary">
+          <div className="col-start-2 text-success">
             <h5 className="font-bold">Resolution</h5>
-
             <p className="text-muted-foreground">{resolution}</p>
           </div>
-        </>
+          {actionPoint.attatchments.length > 0 && (
+            <div className="col-start-1 p-1">
+              <Link2 size={16} />
+            </div>
+          )}
+          <div className="col-start-2">
+            <h5 className="font-bold">Proof of resolution</h5>
+            <div className="flex flex-col gap-1 max-h-56 overflow-y-auto">
+              {actionPoint.attatchments.map((proof, i) => (
+                <a key={i} href={proof} target="_blank" className="underline">
+                  {proof}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       )}
     </motion.div>
   )
