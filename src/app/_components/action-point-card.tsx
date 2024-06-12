@@ -23,6 +23,7 @@ import {
   Link2,
   UnfoldVertical,
   ChevronsUpDown,
+  BadgeCheck,
 } from 'lucide-react'
 import React, { ComponentPropsWithoutRef, act } from 'react'
 import { Separator } from '@/components/ui/separator'
@@ -120,13 +121,13 @@ function ActionPointCard({ actionPoint, index, className, resolved, resolution, 
           </div>
           {actionPoint.attatchments.length > 0 && (
             <div className="col-start-1 p-1">
-              <Link2 size={16} />
+              <BadgeCheck size={16} />
             </div>
           )}
           {actionPoint.attatchments.length > 0 && (
             <div className="col-start-2">
               <h5 className="font-bold">Proof of resolution</h5>
-              <div className="flex max-h-56 flex-col gap-1 overflow-y-auto">
+              <div className="flex max-h-56 flex-col gap-1 overflow-y-auto text-muted-foreground text-sm">
                 {actionPoint.attatchments.map((proof, i) => (
                   <a key={i} href={proof} target="_blank" className="underline">
                     {proof}
