@@ -55,7 +55,7 @@ const guideLinks = [
 async function GuideSideBar({}: Props) {
   return (
     <div className="h-full w-max min-w-64 border-l bg-foreground/5 p-8">
-      <Link href="/home" >
+      <Link href="/home/reflections" >
         <Button variant={'default'} className='w-full mb-8'>
           <ArrowLeft size={16} className="mr-2" />
           Back to Reflekt
