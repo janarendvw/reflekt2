@@ -28,11 +28,13 @@ function Page({}: Props) {
     if (activeTags.length === 0) {
       const tags = reflections.flatMap(reflection => reflection.tags)
       const uniqueTags = Array.from(new Set(tags))
-      setTagButtons(uniqueTags)
+      const alphabeticalTags = uniqueTags.sort((a, b) => a.localeCompare(b))
+      setTagButtons(alphabeticalTags)
     } else {
       const tags = filteredReflections.flatMap(reflection => reflection.tags)
       const uniqueTags = Array.from(new Set(tags))
-      setTagButtons(uniqueTags)
+      const alphabeticalTags = uniqueTags.sort((a, b) => a.localeCompare(b))
+      setTagButtons(alphabeticalTags)
     }
   }, [reflections, filteredReflections, activeTags.length])
 

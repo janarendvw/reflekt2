@@ -37,9 +37,8 @@ function BigButton({ model, index }: Props) {
             <CardTitle className="text-xl font-semibold capitalize">{model}</CardTitle>
             <CardDescription>Start a new reflection using the {model} model</CardDescription>
           </CardHeader>
-          <CardContent>{content}</CardContent>
           <CardFooter>
-            <Button variant="secondary" className="uppercase">
+            <Button className="uppercase">
               Use {model} <ChevronRight size={16} className="ml-2" />
             </Button>
           </CardFooter>

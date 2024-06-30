@@ -38,6 +38,7 @@ function ReflectionField({ label, placeholder, content, setContent, index }: Pro
         placeholder={placeholder}
         value={content[index]}
         onChange={e => handleContentChange(index, e.target.value)}
+        className='h-56'
         required
       />
     </motion.div>

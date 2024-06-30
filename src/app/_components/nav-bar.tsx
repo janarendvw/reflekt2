@@ -39,7 +39,7 @@ function NavBar({}: Props) {
   }, [session, image])
 
   return (
-    <div className="flex items-center justify-between px-4 py-2">
+    <div className="flex items-center justify-between px-4 py-2 min-h-[64px]">
       <Logo />
       <div className="flex items-center gap-4">
         <DropdownMenu>
