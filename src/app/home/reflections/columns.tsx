@@ -10,13 +10,20 @@ import { ColumnDef } from '@tanstack/react-table'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import React from 'react'
-import { EllipsisVertical, Zap } from 'lucide-react'
+import { ArrowUpDown, EllipsisVertical, Zap } from 'lucide-react'
 import { Progress } from '@/components/ui/progress'
 import { deleteReflectionById } from '@/app/server/actions/reflection'
 
 export const columns: ColumnDef<Reflection>[] = [
   {
-    header: 'Created_at',
+    header: ({ column }) => {
+      return (
+        <Button className="pl-0" variant={'ghost'} onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Date
+          <ArrowUpDown size={14} className="ml-2" />
+        </Button>
+      )
+    },
     accessorKey: 'createdAt',
     cell: ({ row }) => (
       <span suppressHydrationWarning className="font-mono text-muted-foreground">
@@ -26,13 +33,25 @@ export const columns: ColumnDef<Reflection>[] = [
     maxSize: 1,
   },
   {
-    header: 'Title',
+    header: ({ column }) => {
+      return (
+        <Button className="pl-0" variant={'ghost'} onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Title
+          <ArrowUpDown size={14} className="ml-2" />
+        </Button>
+      )
+    },
+    enableSorting: true,
     accessorKey: 'title',
     cell: ({ row }) => (
-      <Link href={`/home/reflections/${row.original.id.toString()}`} className="line-clamp-1 font-semibold hover:underline">
+      <Link
+        href={`/home/action-points/${row.original.id.toString()}`}
+        className="line-clamp-1 font-semibold hover:underline"
+      >
         {row.original.title}
       </Link>
     ),
+    enableResizing: true,
   },
   {
     header: 'Resolved',

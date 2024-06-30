@@ -1,11 +1,11 @@
 'use client'
-import { DataTable } from '../../_components/data-table'
 import { columns } from './columns'
 import { getReflections } from '@/app/server/actions/reflection'
 import { Reflection } from '@prisma/client'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { DataTable } from '@/app/home/reflections/_components/data-table'
 
 type Props = {}
 
@@ -15,6 +15,7 @@ function Page({}: Props) {
   const [tagButtons, setTagButtons] = useState<string[]>([])
   const [pending, setPending] = useState<boolean>(true)
   const [filteredReflections, setFilteredReflections] = useState<Reflection[]>([])
+  
 
   useEffect(() => {
     getReflections()

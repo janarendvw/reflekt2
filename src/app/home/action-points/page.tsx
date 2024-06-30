@@ -1,4 +1,4 @@
-import { DataTable } from '@/app/_components/data-table'
+import { DataTable } from '@/app/home/action-points/_components/data-table'
 import { auth } from '@/auth'
 import prisma from '@/lib/client'
 import React from 'react'

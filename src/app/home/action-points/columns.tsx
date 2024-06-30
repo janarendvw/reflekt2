@@ -11,7 +11,15 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { ActionPoint } from '@prisma/client'
 import { ColumnDef } from '@tanstack/react-table'
 import Link from 'next/link'
-import { ArrowLeftRight, CircleCheck, EllipsisVertical, FileSymlink, Hourglass, Trash2 } from 'lucide-react'
+import {
+  ArrowLeftRight,
+  ArrowUpDown,
+  CircleCheck,
+  EllipsisVertical,
+  FileSymlink,
+  Hourglass,
+  Trash2,
+} from 'lucide-react'
 import { Dialog } from '@/components/ui/dialog'
 import ResolveActionPointForm from '@/app/_components/resolve-action-point-form'
 import { DialogTrigger } from '@radix-ui/react-dialog'
@@ -19,7 +27,14 @@ import { useRouter } from 'next/navigation'
 
 export const columns: ColumnDef<ActionPoint>[] = [
   {
-    header: 'Created At',
+    header: ({ column }) => {
+      return (
+        <Button className="pl-0" variant={'ghost'} onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Date
+          <ArrowUpDown size={14} className="ml-2" />
+        </Button>
+      )
+    },
     accessorKey: 'createdAt',
     cell: ({ row }) => (
       <span suppressHydrationWarning className="font-mono text-muted-foreground">
@@ -29,7 +44,15 @@ export const columns: ColumnDef<ActionPoint>[] = [
     maxSize: 1,
   },
   {
-    header: 'Title',
+    header: ({ column }) => {
+      return (
+        <Button className="pl-0" variant={'ghost'} onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Title
+          <ArrowUpDown size={14} className="ml-2" />
+        </Button>
+      )
+    },
+    enableSorting: true,
     accessorKey: 'title',
     cell: ({ row }) => (
       <Link
@@ -42,7 +65,15 @@ export const columns: ColumnDef<ActionPoint>[] = [
     enableResizing: true,
   },
   {
-    header: 'Status',
+    header: ({ column }) => {
+      return (
+        <Button className="pl-0" variant={'ghost'} onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+          Status
+          <ArrowUpDown size={14} className="ml-2" />
+        </Button>
+      )
+    },
+    enableSorting: true,
     accessorKey: 'resolved',
     cell: ({ row }) => (
       <Badge variant={row.original.resolved ? 'success' : 'outline'}>
