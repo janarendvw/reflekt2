@@ -45,7 +45,7 @@ export const columns: ColumnDef<Reflection>[] = [
     accessorKey: 'title',
     cell: ({ row }) => (
       <Link
-        href={`/home/action-points/${row.original.id.toString()}`}
+        href={`/home/reflections/${row.original.id.toString()}`}
         className="line-clamp-1 font-semibold hover:underline"
       >
         {row.original.title}
